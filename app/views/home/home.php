@@ -9,5 +9,4 @@
 class home Extends Controller
 {
 
-    
 }

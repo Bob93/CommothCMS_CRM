@@ -1,7 +1,7 @@
 Options -MultiViews
 RewriteEngine On
 
-RewriteBase /COMMOTH%20CO-1.0/website/public/
+RewriteBase /COMMOTH%20CO-1.0/website/CommothCMS_CRM/public/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
