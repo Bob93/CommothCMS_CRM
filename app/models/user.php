@@ -8,5 +8,5 @@
 
 class User {
 
-    public $name;
+    public $name = 'siisy';
 }

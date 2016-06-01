@@ -10,12 +10,11 @@
 class Home extends Controller {
 
     public function index($name = '', $otherName = '') {
-        echo $name;
 
-       $user =  $this->model('User');
-       $user->name = 'Tijs';
+        $user =  $this->model('User');
+        //echo $user->name;
 
-        echo $user->name;
+        $this->view('home/index', [ 'name'=> $user->name]);
 }
 
     public function test() {

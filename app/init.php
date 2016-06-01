@@ -6,5 +6,10 @@
  * Time: 12:08
  */
 
-require_once 'core/App.php';
-require_once 'core/Controller.php';
+require_once('core/App.php');
+require_once('core/Controller.php');
+
+class Config
+{
+    public static $public_dir = "/COMMOTH CO-1.0/website/CommothCMS_CRM/public/";
+}
