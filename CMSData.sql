@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2016 at 01:42 PM
+-- Generation Time: Jun 07, 2016 at 02:05 PM
 -- Server version: 5.7.11-log
 -- PHP Version: 5.4.22
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `cmsdata`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminlogs`
+--
+
+CREATE TABLE IF NOT EXISTS `adminlogs` (
+  `logID` int(11) NOT NULL,
+  `ActionBy` int(11) NOT NULL,
+  `ActionTime` datetime NOT NULL,
+  `ActionInfo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -163,6 +176,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 --
+-- Indexes for table `adminlogs`
+--
+ALTER TABLE `adminlogs`
+  ADD PRIMARY KEY (`logID`);
+
+--
 -- Indexes for table `company`
 --
 ALTER TABLE `company`
@@ -230,6 +249,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `adminlogs`
+--
+ALTER TABLE `adminlogs`
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `company`
 --
