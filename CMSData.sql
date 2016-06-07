@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema CMSData
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema CMSData
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `CMSData` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `CMSData` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Menu`
+-- Table `CMSData`.`Menu`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Menu` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Menu` (
   `MenuItemID` INT NOT NULL AUTO_INCREMENT,
   `MenuTitel` VARCHAR(45) NULL,
   `Active` TINYINT(2) NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pages`
+-- Table `CMSData`.`Pages`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Pages` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Pages` (
   `PageID` INT NOT NULL AUTO_INCREMENT,
   `Content` TEXT(255) NULL,
   `PageNumber` INT NULL,
@@ -43,16 +43,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pages` (
   INDEX `MenuItemID_idx` (`MenuItemID` ASC),
   CONSTRAINT `MenuItemID`
     FOREIGN KEY (`MenuItemID`)
-    REFERENCES `mydb`.`Menu` (`MenuItemID`)
+    REFERENCES `CMSData`.`Menu` (`MenuItemID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Users`
+-- Table `CMSData`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Users` (
   `UserID` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(430) NULL,
   `Insertion` VARCHAR(7) NULL,
@@ -75,9 +75,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Files`
+-- Table `CMSData`.`Files`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Files` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Files` (
   `FileID` INT NOT NULL AUTO_INCREMENT,
   `FileExtension` VARCHAR(4) NULL,
   `FileName` VARCHAR(45) NULL,
@@ -88,9 +88,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Images`
+-- Table `CMSData`.`Images`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Images` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Images` (
   `ImageID` INT NOT NULL AUTO_INCREMENT,
   `ImageExtension` VARCHAR(4) NULL,
   `ImageName` VARCHAR(45) NULL,
@@ -101,9 +101,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Company`
+-- Table `CMSData`.`Company`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Company` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Company` (
   `CompanyID` INT NOT NULL AUTO_INCREMENT,
   `CompanyName` VARCHAR(45) NULL,
   `CompanyAddress` VARCHAR(45) NULL,
@@ -117,9 +117,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Header`
+-- Table `CMSData`.`Header`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Header` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Header` (
   `HeaderID` INT NOT NULL AUTO_INCREMENT,
   `HeaderContent` TEXT(255) NULL,
   PRIMARY KEY (`HeaderID`),
@@ -128,9 +128,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Footer`
+-- Table `CMSData`.`Footer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Footer` (
+CREATE TABLE IF NOT EXISTS `CMSData`.`Footer` (
   `FooterID` INT NOT NULL AUTO_INCREMENT,
   `FooterContent` TEXT(255) NULL,
   PRIMARY KEY (`FooterID`),
