@@ -16,17 +16,19 @@
     <!-- <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> -->
     <![endif]-->
 
-    <script type="text/javascript" src="<?php  echo $this->public_dir ?> "js/jquery.js"></script>
-    <script type="text/javascript" src="<?php  echo $this->public_dir ?> "js/plugins.js"></script>
+    <script type="text/javascript" src="<?php  echo $this->public_dir ?>js/jquery.js"></script>
+    <script type="text/javascript" src="<?php  echo $this->public_dir ?>js/plugins.js"></script>
 
     <!-- Document Title
     ============================================= -->
     <title>Home - Commoth VOF</title>
 </head>
 <body class="stretched">
+<div id="wrapper" class="clearfix">
+
 <!-- Header
 ============================================= -->
-<header id="header" class="full-header">
+<header id="header" class="full-header" style="animation-duration:0s; opacity: 1;">
 
     <div id="header-wrap">
 
@@ -37,8 +39,8 @@
             <!-- Logo
             ============================================= -->
             <div id="logo">
-                <a href="index.php" class="standard-logo" data-dark-logo="<?php  echo $this->public_dir ?>'images/logo.png"><img src="<?php  echo $this->public_dir ?>'images/logo.png" alt="Commoth Logo"></a>
-                <a href="index.php" class="retina-logo" data-dark-logo="<?php  echo $this->public_dir ?>'images/logo-dark@2x.png"><img src="<?php  echo $this->public_dir ?>'images/logo@2x.png" alt="Commoth Logo"></a>
+                <a href="index.php" class="standard-logo" data-dark-logo="<?php  echo $this->public_dir  ?>'images/logo.png"><img src="<?php  echo $this->public_dir  ?>images/logo.png" alt="Commoth Logo"></a>
+                <a href="index.php" class="retina-logo" data-dark-logo="<?php  echo $this->public_dir  ?>'images/logo-dark@2x.png"><img src="<?php  echo $this->public_dir  ?>images/logo@2x.png" alt="Commoth Logo"></a>
             </div><!-- #logo end -->
 
             <!-- Primary Navigation
@@ -46,10 +48,10 @@
             <nav id="primary-menu">
 
                 <ul>
-                    <li class="current"><a href="index.php"><div>Home</div></a></li>
-                    <li><a href="portfolio.php"><div>Portfolio</div></a></li>
-                    <li><a href="aboutus.php"><div>Over ons</div></a></li>
-                    <li><a href="contact.php"><div>Contact</div></a></li>
+                    <li class="current"><a href="index"><div>Home</div></a></li>
+                    <li><a href="portfolio"><div>Portfolio</div></a></li>
+                    <li><a href="aboutus"><div>Over ons</div></a></li>
+                    <li><a href="contact"><div>Contact</div></a></li>
                 </ul>
 
                 <!-- Top Search
