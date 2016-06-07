@@ -1,94 +1,4 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
-
-    <!-- Stylesheets
-    ============================================= -->
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <?php
-        echo $this->ImportCSS('bootstrap.css');
-        echo $this->ImportCSS('style.css');
-        echo $this->ImportCSS('dark.css');
-        echo $this->ImportCSS('font-icons.css');
-        echo $this->ImportCSS('animate.css');
-        echo $this->ImportCSS('magnific-popup.css');
-        echo $this->ImportCSS('responsive.css');
-    ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lt IE 9]>
-    <!-- <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> -->
-    <![endif]-->
-
-    <!-- External JavaScripts
-    ============================================= -->
-    <?php
-        echo $this->ImportJQuery('js/plugins.js', true);
-        echo $this->ImportJQuery('js/jquery.js', true);
-    ?>
-
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-
-    <!-- Document Title
-    ============================================= -->
-    <title>Home - Commoth VOF</title>
-
-</head>
-
-<body class="stretched">
-
-<!-- Document Wrapper
-============================================= -->
-<div id="wrapper" class="clearfix">
-
-    <!-- Header
-    ============================================= -->
-    <header id="header" class="full-header">
-
-        <div id="header-wrap">
-
-            <div class="container clearfix">
-
-                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-                <!-- Logo
-                ============================================= -->
-                <div id="logo">
-                    <a href="index.php" class="standard-logo" data-dark-logo="images/logo.png"><img src="images/logo.png" alt="Commoth Logo"></a>
-                    <a href="index.php" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
-                </div><!-- #logo end -->
-
-                <!-- Primary Navigation
-                ============================================= -->
-                <nav id="primary-menu">
-
-                    <ul>
-                        <li class="current"><a href="index.php"><div>Home</div></a></li>
-                        <li><a href="portfolio.php"><div>Portfolio</div></a></li>
-                        <li><a href="aboutus.php"><div>Over ons</div></a></li>
-                        <li><a href="contact.php"><div>Contact</div></a></li>
-                    </ul>
-
-                    <!-- Top Search
-                    ============================================= -->
-                    <!--<div id="top-search">
-                        <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
-                        <form action="search.html" method="get">
-                            <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
-                        </form>
-                    </div><!-- #top-search end -->
-
-                </nav><!-- #primary-menu end -->
-
-            </div>
-
-        </div>
-
-    </header><!-- #header end -->
+<html>
 
     <!-- Content
     ============================================= -->
@@ -183,7 +93,7 @@
 
                 <div class="col_one_third">
 
-                    <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+                    <div style="background: url('../public/images/world-map.png') no-repeat center center; background-size: 100%;">
                         <address>
                             Schaapsdrift 76<br>
                             6824GT, Arnhem<br>
@@ -286,9 +196,7 @@
 
 <!-- Footer Scripts
 ============================================= -->
-<?php
-echo $this->ImportJQuery('js/functions.js', true);
-?>
+<?php echo '<script type="text/javascript" src="' . Config::$public_dir . 'js/functions.js"></script>'; ?>
 
 </body>
 </html>

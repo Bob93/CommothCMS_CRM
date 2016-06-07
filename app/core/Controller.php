@@ -10,9 +10,14 @@
 
 class Controller {
 
-    protected function model($model) {
-        require_once '../app/models/' . $model .'.php';
-        return new $model();
+    protected function model($model,$param = null)
+    {
+        require_once '../app/models/' . $model . '.php';
+        if (is_null($param)) {
+            return new $model();
+        } else {
+            return new $model($param);
+        }
     }
 
     protected function view($view, $data = []) {
@@ -30,4 +35,5 @@ class Controller {
             return "<script type=\"text/javascript\" src=\"" . $JQuery . "\"></script>";
         }
     }
+
 }
