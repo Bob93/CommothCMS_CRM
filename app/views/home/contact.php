@@ -1,200 +1,176 @@
-    <!-- Content
-    ============================================= -->
-    <section id="content">
+<section id="page-title">
 
-        <div class="content-wrap">
-
-            <div class="container clearfix">
-
-                <div class="heading-block center">
-                    <h3>Welkom bij  <span>Contact YESS!</span></h3>
-						<span>Wij zijn nog studenten die nog volop in de leer zijn.
-						Door onze ervaringen op school en buiten school bieden wij goede websites aan voor een goede prijs.
-						Wij passen ons aan naar de wensen van de klant en proberen hierdoor een zo goed mogelijk product
-						neer te zetten waar wij en de klant tevreden mee kunnen zijn.</span>
-                </div>
-            </div>
-
-            <div class="container clearfix">
-                <div class="heading-block center">
-                    <a href="aboutus.php" class="button-homepage button button-reveal button-xlarge button-rounded tright"><i class="icon-angle-right"></i><span>Maak kennis met ons</span></a>
-                </div>
-            </div>
-
-            <div class="container clearfix">
-
-                <div class="col_one_fourth nobottommargin">
-                    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="fa fa-edge fa-2x"></i></a>
-                        </div>
-                        <h3>Responsive websites<span class="subtitle">Wij ontwikkelen uw websites responsive</span></h3>
-                    </div>
-                </div>
-
-                <div class="col_one_fourth nobottommargin">
-                    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="i-alt icon-wallet"></i></a>
-                        </div>
-                        <h3>Easy Payment Options<span class="subtitle">Credit Cards &amp; PayPal Support</span></h3>
-                    </div>
-                </div>
-
-                <div class="col_one_fourth nobottommargin">
-                    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="i-alt icon-megaphone"></i></a>
-                        </div>
-                        <h3>Instant Notifications<span class="subtitle">Realtime Email &amp; SMS Support</span></h3>
-                    </div>
-                </div>
-
-                <div class="col_one_fourth nobottommargin col_last">
-                    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="i-alt icon-fire"></i></a>
-                        </div>
-                        <h3>Hot Offers Daily<span class="subtitle">Upto 50% Discounts</span></h3>
-                    </div>
-                </div>
-
-                <div class="clear"></div><div class="line bottommargin-lg"></div>
-
-            </div>
-
-        </div>
-
-    </section><!-- #content end -->
-
-<footer id="footer" class="dark">
-
-    <div class="container">
-
-        <!-- Footer Widgets
-        ============================================= -->
-        <div class="footer-widgets-wrap clearfix">
-
-            <div class="col_one_third">
-
-                <div class="widget clearfix">
-
-                    <img src="../public/images/commoth-logo.png" alt="" class="footer-logo">
-
-                    <p>Wij geloven in  <strong>simpele</strong>, <strong>creatieve</strong> &amp; <strong>flexibele</strong> design standaarden.</p>
-
-                </div>
-
-            </div>
-
-            <div class="col_one_third">
-
-                <div style="background: url('../images/world-map.png') no-repeat center center; background-size: 100%;">
-                    <address>
-                        Schaapsdrift 76<br>
-                        6824GT, Arnhem<br>
-                    </address>
-                    <abbr title="Phone Number"><strong>Phone 1:</strong></abbr> +31 6 5359 22 11<br>
-                    <abbr title="Phone Number"><strong>Phone 2:</strong></abbr> +31 6 8117 69 49<br>
-                    <abbr title="Email Address"><strong>Email:</strong></abbr> commothnet@gmail.com
-                </div>
-
-            </div>
-
-            <div class="col_one_third col_last">
-
-                <div class="widget clearfix" style="margin-bottom: -20px;">
-
-                    <div class="row">
-
-                        <div class="col-md-6 clearfix bottommargin-sm">
-                            <a href="http://www.facebook.com/commoth/" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-                            <a href="http://www.facebook.com/commoth/"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
-                        </div>
-
-                        <div class="col-md-6 clearfix bottommargin-sm">
-                            <a href="http://twitter.com/CommothVOF" class="social-icon si-dark si-colored si-twitter nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                            </a>
-                            <a href="http://twitter.com/CommothVOF"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
-                        </div>
-
-                        <div class="col-md-6 clearfix bottommargin-sm">
-                            <a href="#" class="social-icon si-dark si-colored si-linkedin nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-linkedin"></i>
-                                <i class="icon-linkedin"></i>
-                            </a>
-                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on LinkedIn</small></a>
-                        </div>
-
-                        <div class="col-md-6 clearfix bottommargin-sm">
-                            <a href="#" class="social-icon si-dark si-colored si-github nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-github"></i>
-                                <i class="icon-github"></i>
-                            </a>
-                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Github</small></a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div><!-- .footer-widgets-wrap end -->
-
+    <div class="container clearfix">
+        <h1>Contact</h1>
+				<span>	Om met ons in contact te komen kunt u altijd naar ons mailen: commothnet@gmail.com.<br>
+					U kunt ook altijd in contact met ons komen met het onderstaand contact formulier.</span>
+        <ol class="breadcrumb">
+            <li><a href="index.php">Home</a></li>
+            <li class="active">Contact</li>
+        </ol>
     </div>
 
-    <!-- Copyrights
-    ============================================= -->
-    <div id="copyrights">
+</section><!-- #page-title end -->
+
+<!-- Google Map
+============================================= -->
+<section id="google-map" class="gmap slider-parallax"></section>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="<?php echo $this->public_dir ?>js/jquery.gmap.js"></script>
+
+<script type="text/javascript">
+
+    $('#google-map').gMap({
+
+        address: 'Arnhem, Netherlands',
+        maptype: 'ROADMAP',
+        zoom: 14,
+        markers: [
+            {
+                address: "Arnhem, Netherlands",
+                html: '<div style="width: 300px;"><h4 style="margin-bottom: 8px;">Hallo, wij zijn <span>Commoth</span></h4><p class="nobottommargin">Our mission is to help people to <strong>earn</strong> and to <strong>learn</strong> online. We operate <strong>marketplaces</strong> where hundreds of thousands of people buy and sell digital goods every day, and a network of educational blogs where millions learn <strong>creative skills</strong>.</p></div>',
+                icon: {
+                    image: "images/icons/map-icon-red.png",
+                    iconsize: [32, 39],
+                    iconanchor: [13,39]
+                }
+            }
+        ],
+        doubleclickzoom: false,
+        controls: {
+            panControl: true,
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: false,
+            streetViewControl: false,
+            overviewMapControl: false
+        }
+
+    });
+
+</script><!-- Google Map End -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
 
         <div class="container clearfix">
 
-            <div class="col_half">
-                Copyrights &copy; <?php echo date('Y'); ?> All Rights Reserved by Commoth VOF.<br>
-                <!--<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>-->
-            </div>
+            <!-- Postcontent
+            ============================================= -->
+            <div class="postcontent nobottommargin">
 
-            <div class="col_half col_last tright">
-                <div class="fright clearfix">
-                    <a href="http://www.facebook.com/commoth/" class="social-icon si-small si-borderless si-facebook">
+                <h3>Stuur ons een e-mail</h3>
+
+                <div id="contact-form-result" data-notify-type="success" data-notify-msg="<i class=icon-ok-sign></i> Message Sent Successfully!"></div>
+
+                <form class="nobottommargin" id="template-contactform" name="template-contactform" action="include/sendemail.php" method="post">
+
+                    <div class="form-process"></div>
+
+                    <div class="col_one_third">
+                        <label for="template-contactform-name">Naam <small>*</small></label>
+                        <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" />
+                    </div>
+
+                    <div class="col_one_third">
+                        <label for="template-contactform-email">E-mail <small>*</small></label>
+                        <input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email sm-form-control" />
+                    </div>
+
+                    <div class="col_one_third col_last">
+                        <label for="template-contactform-phone">Telefoon</label>
+                        <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="col_two_third">
+                        <label for="template-contactform-subject">Onderwerp <small>*</small></label>
+                        <input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" />
+                    </div>
+
+                    <div class="col_one_third col_last">
+                        <label for="template-contactform-service">Service</label>
+                        <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
+                            <option value="">-- Selecteer --</option>
+                            <option value="PHP / MySQL">PHP / MySQL</option>
+                            <option value="HTML5 / CSS3">HTML5 / CSS3</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                        </select>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="col_full">
+                        <label for="template-contactform-message">Reactie <small>*</small></label>
+                        <textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
+                    </div>
+
+                    <div class="col_full hidden">
+                        <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="sm-form-control" />
+                    </div>
+
+                    <div class="col_full">
+                        <button class="button button-3d nomargin" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Send Message</button>
+                    </div>
+
+                </form>
+
+                <script type="text/javascript">
+
+                    $("#template-contactform").validate({
+                        submitHandler: function(form) {
+                            $('.form-process').fadeIn();
+                            $(form).ajaxSubmit({
+                                target: '#contact-form-result',
+                                success: function() {
+                                    $('.form-process').fadeOut();
+                                    $(form).find('.sm-form-control').val('');
+                                    $('#contact-form-result').attr('data-notify-msg', $('#contact-form-result').html()).html('');
+                                    SEMICOLON.widget.notifications($('#contact-form-result'));
+                                }
+                            });
+                        }
+                    });
+
+                </script>
+
+            </div><!-- .postcontent end -->
+
+            <!-- Sidebar
+            ============================================= -->
+            <div class="sidebar col_last nobottommargin">
+
+                <address>
+                    Schaapsdrift 76<br>
+                    6824GT, Arnhem<br>
+                </address>
+                <abbr title="Phone Number"><strong>Phone 1:</strong></abbr> +31 6 5359 22 11<br>
+                <abbr title="Phone Number"><strong>Phone 2:</strong></abbr> +31 6 8117 69 49<br>
+                <abbr title="Email Address"><strong>E-mail:</strong></abbr> commothnet@gmail.com
+
+                <div class="widget noborder notoppadding">
+
+                    <a href="http://www.facebook.com/commoth/" class="social-icon si-small si-dark si-facebook">
                         <i class="icon-facebook"></i>
                         <i class="icon-facebook"></i>
                     </a>
 
-                    <a href="http://twitter.com/CommothVOF" class="social-icon si-small si-borderless si-twitter">
+                    <a href="http://twitter.com/CommothVOF" class="social-icon si-small si-dark si-twitter">
                         <i class="icon-twitter"></i>
                         <i class="icon-twitter"></i>
                     </a>
+
                 </div>
 
-                <div class="clear"></div>
-
-                <i class="icon-envelope2"></i> commothnet@gmail.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +31 6 5359 22 11 <span class="middot">&middot;</span> <i class="icon-headphones"></i> +31 6 8117 69 49
-            </div>
+            </div><!-- .sidebar end -->
 
         </div>
 
-    </div><!-- #copyrights end -->
+    </div>
 
-</footer><!-- #footer end -->
-
-</div><!-- #wrapper end -->
-
-<!-- Go To Top
-============================================= -->
-<div id="gotoTop" class="icon-angle-up"></div>
-
-<!-- Footer Scripts
-============================================= -->
-<?php echo '<script type="text/javascript" src="' . Config::$public_dir . 'js/functions.js"></script>'; ?>
-
-</body>
-</html>
-
-<?=$data['name']; ?>
+</section><!-- #content end -->

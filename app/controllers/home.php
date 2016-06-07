@@ -16,6 +16,7 @@ class Home extends Controller {
 
         $this->view('defaults/header');
         $this->view('home/index', [ 'name'=> $user->name]);
+        $this->view('defaults/footer');
 }
 
     public function contact() {
@@ -26,9 +27,32 @@ class Home extends Controller {
             $this->view('defaults/header');
             //De informatie wordt hier gepushed naar de view.
             $this->view('home/contact', [ 'name'=> $user->name]);
+            $this->view('defaults/footer');
         //}
+    }
 
+    public function portfolio() {
+        //if(isset($_POST['email'])){
+        //Test deze informatie wordt gepushed naar de view:
+        $user =  $this->model('User');
 
+        $this->view('defaults/header');
+        //De informatie wordt hier gepushed naar de view.
+        $this->view('home/portfolio', [ 'name'=> $user->name]);
+        $this->view('defaults/footer');
+        //}
+    }
+
+    public function aboutus() {
+        //if(isset($_POST['email'])){
+        //Test deze informatie wordt gepushed naar de view:
+        $user =  $this->model('User');
+
+        $this->view('defaults/header');
+        //De informatie wordt hier gepushed naar de view.
+        $this->view('home/aboutus', [ 'name'=> $user->name]);
+        $this->view('defaults/footer');
+        //}
     }
 
     public function test() {
@@ -39,57 +63,7 @@ class Home extends Controller {
         echo $userm->name;
     }
 
-    protected function ImportHeader() {
-        return '<div id="wrapper" class="clearfix">
-
-    <!-- Header
-    ============================================= -->
-    <header id="header" class="full-header">
-
-        <div id="header-wrap">
-
-            <div class="container clearfix">
-
-                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-                <!-- Logo
-                ============================================= -->
-                <div id="logo">
-                    <a href="index.php" class="standard-logo" data-dark-logo="' . Config::$public_dir  . 'images/logo.png"><img src="' . Config::$public_dir  . 'images/logo.png" alt="Commoth Logo"></a>
-                    <a href="index.php" class="retina-logo" data-dark-logo="' . Config::$public_dir  . 'images/logo-dark@2x.png"><img src="' . Config::$public_dir  . 'images/logo@2x.png" alt="Canvas Logo"></a>
-                </div><!-- #logo end -->
-
-                <!-- Primary Navigation
-                ============================================= -->
-                <nav id="primary-menu">
-
-                    <ul>
-                        <li class="current"><a href="index.php"><div>Home</div></a></li>
-                        <li><a href="portfolio.php"><div>Portfolio</div></a></li>
-                        <li><a href="aboutus.php"><div>Over ons</div></a></li>
-                        <li><a href="contact.php"><div>Contact</div></a></li>
-                    </ul>
-
-                    <!-- Top Search
-                    ============================================= -->
-                    <!--<div id="top-search">
-                        <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
-                        <form action="search.html" method="get">
-                            <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
-                        </form>
-                    </div><!-- #top-search end -->
-
-                </nav><!-- #primary-menu end -->
-
-            </div>
-
-        </div>
-
-    </header><!-- #header end -->';
-
-    }
-
-    protected function ImportFooter() {
+       protected function ImportFooter() {
         return '<footer id="footer" class="dark">
         <div class="container">
             <div class="footer-widgets-wrap clearfix">
