@@ -8,23 +8,25 @@
 /* niet dingen echo'en in de controller maar in de view */
 
 class Home extends Controller {
+    public $public_dir = "/COMMOTH CO-1.0/website/CommothCMS_CRM/public/";
 
     public function index($name = '', $otherName = '') {
-
         $user =  $this->model('User');
         //echo $user->name;
 
+        $this->view('defaults/header');
         $this->view('home/index', [ 'name'=> $user->name]);
 }
 
     public function contact() {
-        if(isset($_POST['email'])){
-            //Handel contact formulier af
-        }{
-            //Laat contact formulier zien
+        //if(isset($_POST['email'])){
+            //Test deze informatie wordt gepushed naar de view:
+            $user =  $this->model('User');
+
             $this->view('defaults/header');
-            $this->view('home/contact');
-        }
+            //De informatie wordt hier gepushed naar de view.
+            $this->view('home/contact', [ 'name'=> $user->name]);
+        //}
 
 
     }

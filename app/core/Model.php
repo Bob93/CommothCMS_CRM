@@ -38,10 +38,6 @@ class Model {
         $sth->bindValue(':username',$username);
         $sth->bindValue(':password',"HelloWorld");
         $sth->execute();
-
-
-
-
     }
 
 
