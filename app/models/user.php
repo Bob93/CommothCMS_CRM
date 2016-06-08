@@ -85,6 +85,39 @@ class User extends Model{
         $sth->execute();
     }
 
+    // aanpassingen van een gebruiker
+    public function updateUser($id, $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
+                               $active, $lastlocation)
+    {
+        // get het id van de gebruiker
+        $this->getAllUserById($id);
+
+        // het nieuwe of aangepaste wachtwoord opnieuw hashen voor het wordt opgeslagen.
+        $new_hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        // client ip adres opvragen
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        // Updaten van de database, tabel users
+        $query = "UPDATE users SET `Firstname`=`$firstname`, `Insertion`=`$insertion`, `Lastname`=`$lastname`, `Username`=`$username`,
+           `Password`=`$new_hashed_password`, `Phone`=`$phone`, `Address`=`$address`, `Country`=`$country`, `Email`=`$email`,
+           `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=`NOW()`, `LastLocation`=`$lastlocation`";
+        $sth = $this->dbh->prepare($query);
+        $sth->execute();
+    }
+
+
     public function deleteUser($id)
     {
 
