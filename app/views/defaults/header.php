@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="SemiColonWeb" />
@@ -23,12 +24,12 @@
     ============================================= -->
     <title>Home - Commoth VOF</title>
 </head>
-<body class="stretched">
+<body class="stretched device-lg">
 <div id="wrapper" class="clearfix">
 
 <!-- Header
 ============================================= -->
-<header id="header" class="full-header" style="animation-duration:0s; opacity: 1;">
+<header id="header" class="sticky-header">
 
     <div id="header-wrap">
 
