@@ -3,32 +3,61 @@
 class Model {
 
     public $dbh = null;
-    protected function CreateConnection() {
+
+    public function getDbh()
+    {
+        return $this->dbh;
+    }
+
+    public function setDbh($dbh)
+    {
+        $this->dbh = $dbh;
+    }
+
+    /*
+     *
+     * Nieuwe connectie maken met de database.
+     *
+     * */
+    protected function CreateConnection()
+    {
         $this->dbh = new PDO('mysql:host=localhost;dbname=commoth', 'username', 'password');
+
+        return $this->dbh;
     }
 
-    protected function CloseConnecton() {
+    /*
+     *  De connectie sluiten.
+     * */
+    protected function CloseConnecton()
+    {
 
     }
-    protected function query(){
+
+    protected function query()
+    {
         $query = "SELECT * FROM Users";
 
-        $sth = $this->dbh->prepare($query);
+        $sth = $this->CreateConnection()->prepare($query);
         $sth->execute();
 
 
-        if($sth->rowCount() >= 1){
+        if($sth->rowCount() >= 1)
+        {
 
             //Kost veel memory
-            foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row){
+            foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
+            {
                 $row->Username;
             }
 
             //Kost iets minder
-            while($row = $sth->fetch(PDO::FETCH_OBJ)){
+            while($row = $sth->fetch(PDO::FETCH_OBJ))
+            {
                 $row->Username;
             }
-        }else{
+        }else
+        {
             //Geen resultaten gevonden
         }
 
