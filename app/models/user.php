@@ -29,9 +29,13 @@ class User extends Model{
 
     public function __construct($id = null)
     {
-        if(!is_null($id)){
-            $this->getAllUserById($id);
-        }
+//        if(!is_null($id)){
+//            $this->getAllUserById($id);
+//        }
+    }
+
+    public function PushInfoTest() {
+        return 'yes';
     }
 
     // alle gebruikers inladen bij het is
