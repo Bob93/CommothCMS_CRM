@@ -92,6 +92,23 @@ class User extends Model{
         }
     }
 
+    // check of de username al in gebruik is
+    public function checkUsername($username)
+    {
+        $query = "SELECT Username FROM users WHERE Username=`$username`";
+        $sth = $this->dbh->prepare($query);
+        $sth->execute($query);
+
+        if($_SESSION['username'] == $username)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
     public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
         $registrationip)
