@@ -24,7 +24,7 @@
     ============================================= -->
     <title>Home - Commoth VOF</title>
 </head>
-<body class="stretched device-lg">
+<body class="stretched device-lg no-transition">
 <div id="wrapper" class="clearfix">
 
 <!-- Header

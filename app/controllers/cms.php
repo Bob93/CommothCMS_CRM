@@ -12,12 +12,24 @@ class CMS extends Controller {
 
     public function index($name = '', $otherName = '') {
         $user =  $this->model('User');
-        //echo $user->name;
 
         $this->view('cms-defaults/header');
-        $this->view('cms/index', [ 'name'=> $user->name]);
+        //Versturen van data naar de view
+        $this->view('cms/index');
+        //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
 }
+
+    public function GetCurrentPage() {
+        $current_page = explode("/", $_SERVER['REQUEST_URI']);
+        $search = "cms";
+        while (($next = next($current_page)) !== NULL) {
+            if ($next == $search) {
+                return next($current_page);
+            }
+            }
+        }
+
 
     public function test() {
         echo 'home/test';

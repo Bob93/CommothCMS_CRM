@@ -12,10 +12,13 @@ class Home extends Controller {
 
     public function index($name = '', $otherName = '') {
         $user =  $this->model('User');
+        //$user->PushInfoTest();
         //echo $user->name;
 
         $this->view('defaults/header');
-        $this->view('home/index', [ 'name'=> $user->name]);
+        //$this->view('home/index');
+        $this->view('home/index', [ 'name'=> 'Hello']);
+        //$this->view('home/index', [ 'name'=> $user->PushInfoTest()]);
         $this->view('defaults/footer');
 }
 
@@ -26,7 +29,7 @@ class Home extends Controller {
 
             $this->view('defaults/header');
             //De informatie wordt hier gepushed naar de view.
-            $this->view('home/contact', [ 'name'=> $user->name]);
+            $this->view('home/contact', [ 'name'=> 'Hello']);
             $this->view('defaults/footer');
         //}
     }
@@ -54,6 +57,7 @@ class Home extends Controller {
         $this->view('defaults/footer');
         //}
     }
+
 
     public function test() {
         echo 'home/test';
