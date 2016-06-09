@@ -37,6 +37,7 @@ class User extends Model{
     // alle gebruikers inladen bij het is
     public function getAllUserById($id = null)
     {
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
             $query = "SELECT UserID FROM Users WHERE UserID = :id";
@@ -65,6 +66,7 @@ class User extends Model{
         session_start();
         $username = $_GET['username'];
 
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
             $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
@@ -110,6 +112,7 @@ class User extends Model{
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
             // insertion query met prepare en execute statments
@@ -150,6 +153,7 @@ class User extends Model{
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
             // Updaten van de database, tabel users
@@ -165,11 +169,13 @@ class User extends Model{
         }
     }
 
-
+    // Door het verwijderen van de gebruiker wordt active op 0 gezet. Hij blijft dan nog wel in de database staan maar kan niet worden
+    // gebruikt.
     public function deleteUser($id, $active = 0)
     {
         $this->getSingleUserById($id);
 
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
             $query = "UPDATE users SET `Active`=`$active`";
             $sth = $this->dhb->prepare($query);
