@@ -37,10 +37,17 @@ class User extends Model{
     // alle gebruikers inladen bij het is
     public function getAllUserById($id = null)
     {
-        $query = "SELECT UserID FROM Users WHERE UserID = :id";
-        $sth = $this->dbh->prepare($query);
-        $sth->bindValue(':id',$id);
-        $sth->execute();
+        try
+        {
+            $query = "SELECT UserID FROM Users WHERE UserID = :id";
+            $sth = $this->dbh->prepare($query);
+            $sth->bindValue(':id', $id);
+            $sth->execute();
+        }
+        catch(Exception $e)
+        {
+            echo 'Het ophalen van de gebruikers is niet gelukt! ' . $e;
+        }
 
         // alle gebruikers ophalen met een count 1 en hoger. Ze worden weergegeven met de voornaam, achternaam en username.
         if($sth->rowCount() >= 1)
@@ -57,11 +64,20 @@ class User extends Model{
     {
         session_start();
         $username = $_GET['username'];
-        $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
-        $result = $this->dbh->prepare($query);
-        $result->execute();
-        $value = $result->fetch(PDO::FETCH_OBJ);
-        $_SESSION['id'] = $value->id;
+
+        try
+        {
+            $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
+            $result = $this->dbh->prepare($query);
+            $result->execute();
+            $value = $result->fetch(PDO::FETCH_OBJ);
+            $_SESSION['id'] = $value->id;
+        }
+        catch(Exception $e)
+        {
+            echo 'Het ophalen van de gebruiker is niet gelukt! ' . $e;
+        }
+
         $this->id = $_SESSION['id'];
 
         if($this->id < 1)
@@ -94,13 +110,20 @@ class User extends Model{
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        // insertion query met prepare en execute statments
-        $query = "INSERT INTO users (`Firstname`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
+        try
+        {
+            // insertion query met prepare en execute statments
+            $query = "INSERT INTO users (`Firstname`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
           `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
           `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
           `$active`, `$ip`, `$registrationip`, NOW(), NOW(), NULL )";
-        $sth = $this->dbh->prepare($query);
-        $sth->execute();
+            $sth = $this->dbh->prepare($query);
+            $sth->execute();
+        }
+        catch(Exception $e)
+        {
+            echo 'Het nieuwe account is niet aangemaakt! ' . $e;
+        }
     }
 
     // aanpassingen van een gebruiker
@@ -127,21 +150,35 @@ class User extends Model{
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        // Updaten van de database, tabel users
-        $query = "UPDATE users SET `Firstname`=`$firstname`, `Insertion`=`$insertion`, `Lastname`=`$lastname`, `Username`=`$username`,
+        try
+        {
+            // Updaten van de database, tabel users
+            $query = "UPDATE users SET `Firstname`=`$firstname`, `Insertion`=`$insertion`, `Lastname`=`$lastname`, `Username`=`$username`,
            `Password`=`$new_hashed_password`, `Phone`=`$phone`, `Address`=`$address`, `Country`=`$country`, `Email`=`$email`,
            `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=NOW(), `LastLocation`=NULL";
-        $sth = $this->dbh->prepare($query);
-        $sth->execute();
+            $sth = $this->dbh->prepare($query);
+            $sth->execute();
+        }
+        catch(Exception $e)
+        {
+            echo 'Er is iets fout gegaan in de verwerking! ' . $e;
+        }
     }
 
 
     public function deleteUser($id, $active = 0)
     {
         $this->getSingleUserById($id);
-        $query = "UPDATE users SET `Active`=`$active`";
-        $sth = $this->dhb->prepare($query);
-        $sth->execute();
+
+        try {
+            $query = "UPDATE users SET `Active`=`$active`";
+            $sth = $this->dhb->prepare($query);
+            $sth->execute();
+        }
+        catch(Exception $e)
+        {
+            echo 'De gebruiker is niet verwijderd! ' . $e;
+        }
     }
 
 
