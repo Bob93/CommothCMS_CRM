@@ -52,9 +52,27 @@ class User extends Model{
         }
     }
 
+    // selecteer 1 user op het id
+    public function getSingleUserById($id = null)
+    {
+        session_start();
+        $username = $_GET['username'];
+        $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
+        $result = $this->dbh->prepare($query);
+        $result->execute();
+        $value = $result->fetch(PDO::FETCH_OBJ);
+        $_SESSION['id'] = $value->id;
+        $this->id = $_SESSION['id'];
+
+        if($this->id < 1)
+        {
+            session_die();
+        }
+    }
+
     // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
     public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
-        $registrationip, $lastlocation)
+        $registrationip)
     {
         $rights = 0;
         $active = 1;
@@ -80,14 +98,14 @@ class User extends Model{
         $query = "INSERT INTO users (`Firstname`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
           `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
           `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
-          `$active`, `$ip`, `$registrationip`, NOW(), NOW(), `$lastlocation`)";
+          `$active`, `$ip`, `$registrationip`, NOW(), NOW(), NULL )";
         $sth = $this->dbh->prepare($query);
         $sth->execute();
     }
 
     // aanpassingen van een gebruiker
     public function updateUser($id, $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
-                               $active, $lastlocation)
+                               $active)
     {
         // get het id van de gebruiker
         $this->getAllUserById($id);
@@ -112,15 +130,18 @@ class User extends Model{
         // Updaten van de database, tabel users
         $query = "UPDATE users SET `Firstname`=`$firstname`, `Insertion`=`$insertion`, `Lastname`=`$lastname`, `Username`=`$username`,
            `Password`=`$new_hashed_password`, `Phone`=`$phone`, `Address`=`$address`, `Country`=`$country`, `Email`=`$email`,
-           `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=`NOW()`, `LastLocation`=`$lastlocation`";
+           `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=NOW(), `LastLocation`=NULL";
         $sth = $this->dbh->prepare($query);
         $sth->execute();
     }
 
 
-    public function deleteUser($id)
+    public function deleteUser($id, $active = 0)
     {
-
+        $this->getSingleUserById($id);
+        $query = "UPDATE users SET `Active`=`$active`";
+        $sth = $this->dhb->prepare($query);
+        $sth->execute();
     }
 
 
