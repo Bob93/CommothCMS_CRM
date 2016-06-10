@@ -1344,7 +1344,7 @@ body.stretched #header.full-header #primary-menu ul li.mega-menu .mega-menu-cont
 }
 
 #primary-menu > div > ul > li:hover a,
-#primary-menu > div > ul > li.current a { color: #1ABC9C; }
+#primary-menu > div > ul > li.current a { color: orange; }
 
 body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.center > ul,
 body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.center > div {
@@ -12109,6 +12109,8 @@ body:not(.device-touch) .tagcloud a {
 .table .warning { color: #8a6d3b; }
 
 .table .danger { color: #a94442; }
+
+.table-no-padding { padding: 0 0 0 0!important; margin: 0 0 0 0!important;}
 
 .btn-link,
 .pagination > li > a, .pagination > li > span,
