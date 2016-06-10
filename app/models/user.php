@@ -180,9 +180,10 @@ class User extends Model{
         try
         {
             // Updaten van de database, tabel users
-            $query = "UPDATE users SET `Firstname`=`$firstname`, `Insertion`=`$insertion`, `Lastname`=`$lastname`, `Username`=`$username`,
-           `Password`=`$new_hashed_password`, `Phone`=`$phone`, `Address`=`$address`, `Country`=`$country`, `Email`=`$email`,
-           `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=NOW(), `LastLocation`=NULL";
+            $query = "UPDATE users SET `Firstname`=`$firstname` AND `Insertion`=`$insertion` AND `Lastname`=`$lastname` AND
+            `Username`=`$username` AND `Password`=`$new_hashed_password` AND `Phone`=`$phone` AND `Address`=`$address` AND
+            `Country`=`$country` AND `Email`=`$email` AND `Rights`=`$rights` AND `Active`=`$active` AND `IP`=`$ip` AND
+            `LastLogin`=NOW() AND `LastLocation`=NULL";
             $sth = $this->dbh->prepare($query);
             $sth->execute();
             return $sth;
