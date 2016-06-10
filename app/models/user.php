@@ -29,9 +29,9 @@ class User extends Model{
 
     public function __construct($id = null)
     {
-//        if(!is_null($id)){
-//            $this->getAllUserById($id);
-//        }
+        if(!is_null($id)){
+           $this->getAllUserById($id);
+        }
     }
 
     public function PushInfoTest() {
@@ -48,19 +48,20 @@ class User extends Model{
             $sth = $this->dbh->prepare($query);
             $sth->bindValue(':id', $id);
             $sth->execute();
+
+            // alle gebruikers ophalen met een count 1 en hoger. Ze worden weergegeven met de voornaam, achternaam en username.
+            if($sth->rowCount() >= 1)
+            {
+                $row = $sth->fetch(PDO::FETCH_OBJ);
+                $this->name = $row->firstname . ' ' . $row->lastname;
+                $this->username = $row->username;
+                $this->id = $row->id;
+                return $this->id;
+            }
         }
         catch(Exception $e)
         {
-            echo 'Het ophalen van de gebruikers is niet gelukt! ' . $e;
-        }
-
-        // alle gebruikers ophalen met een count 1 en hoger. Ze worden weergegeven met de voornaam, achternaam en username.
-        if($sth->rowCount() >= 1)
-        {
-            $row = $sth->fetch(PDO::FETCH_OBJ);
-            $this->name = $row->firstname . ' ' . $row->lastname;
-            $this->username = $row->username;
-            $this->id = $row->id;
+            return 'Het ophalen van de gebruikers is niet gelukt! ' . $e;
         }
     }
 
@@ -88,7 +89,7 @@ class User extends Model{
 
         if($this->id < 1)
         {
-            session_die();
+            session_destroy();
         }
     }
 
@@ -143,10 +144,11 @@ class User extends Model{
           `$active`, `$ip`, `$registrationip`, NOW(), NOW(), NULL )";
             $sth = $this->dbh->prepare($query);
             $sth->execute();
+            return $sth;
         }
         catch(Exception $e)
         {
-            echo 'Het nieuwe account is niet aangemaakt! ' . $e;
+            return 'Het nieuwe account is niet aangemaakt! ' . $e;
         }
     }
 
@@ -183,10 +185,11 @@ class User extends Model{
            `Rights`=`$rights`, `Active`=`$active`, `IP`=`$ip`, `LastLogin`=NOW(), `LastLocation`=NULL";
             $sth = $this->dbh->prepare($query);
             $sth->execute();
+            return $sth;
         }
         catch(Exception $e)
         {
-            echo 'Er is iets fout gegaan in de verwerking! ' . $e;
+            return 'Er is iets fout gegaan in de verwerking! ' . $e;
         }
     }
 
@@ -201,10 +204,11 @@ class User extends Model{
             $query = "UPDATE users SET `Active`=`$active`";
             $sth = $this->dhb->prepare($query);
             $sth->execute();
+            return $sth;
         }
         catch(Exception $e)
         {
-            echo 'De gebruiker is niet verwijderd! ' . $e;
+            return 'De gebruiker is niet verwijderd! ' . $e;
         }
     }
 
