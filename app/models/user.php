@@ -110,6 +110,27 @@ class User extends Model{
         }
     }
 
+    // check of het wachtwoord overeen komt
+    public function checkPassword()
+    {
+        $password = $_GET['password'];
+
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        $password = $_GET['password'];
+
+        $check_hash = password_hash($password, PASSWORD_BCRYPT);
+
+        if($hashed_password == $check_hash)
+        {
+            return 'Ingevulde wachtwoorden komen overeen en zijn geaccepteerd';
+        }
+        else
+        {
+           return 'De wachtwoorden komen niet overeen! Vul het opnieuw in!';
+        }
+    }
+
     // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
     public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
         $registrationip)
