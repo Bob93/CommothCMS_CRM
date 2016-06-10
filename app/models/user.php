@@ -9,7 +9,7 @@
 class User extends Model{
 
     public $id;
-    public $name = 'siisy';
+    public $name;
     public $firstname;
     public $insertion;
     public $lastname;
@@ -56,13 +56,37 @@ class User extends Model{
                 $this->name = $row->firstname . ' ' . $row->lastname;
                 $this->username = $row->username;
                 $this->id = $row->id;
-                return $this->id;
+
+                // Door alle gebruikers van de database heen loopen.
+                foreach($row as $rows)
+                {
+                   echo  "<tr>" . $rows['UserID'] . "</tr>",
+                        "<tr>" . $rows['Firstname'] . "</tr>",
+                        "<tr>" . $rows['Insertion'] . "</tr>",
+                        "<tr>" . $rows['Lastname'] . "</tr>",
+                        "<tr>" . $rows['Username'] . "</tr>",
+                        "<tr>" . $rows['Phone'] . "</tr>",
+                        "<tr>" . $rows['Address'] . "</tr>",
+                        "<tr>" . $rows['Email'] . "</tr>",
+                        "<tr>" . $rows['Country'] . "</tr>",
+                        "<tr>" . $rows['Rights'] . "</tr>",
+                        "<tr>" . $rows['Active'] . "</tr>",
+                        "<tr>" . $rows['DateSignedUp'] . "</tr>",
+                        "<tr>" . $rows['LastLogin'] . "</tr>";
+                };
+
+                return $row;
+            }
+            else
+            {
+                return 'Het ophalen van de gebruikers is mislukt.';
             }
         }
         catch(Exception $e)
         {
             return 'Het ophalen van de gebruikers is niet gelukt! ' . $e;
         }
+
     }
 
     // selecteer 1 user op het id
