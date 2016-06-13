@@ -89,11 +89,11 @@
                     foreach($data['users'] as $user)
                     {
                         echo "<tr>
-                                <td>" . $user['UserID'] . "</td>",
-                                "<td>" . $user['FirstName'] . "</td>",
-                                "<td>" . $user['Username'] . "</td>",
-                                "<td>" . $user['DateSignedUp'] . "</td>",
-                                "<td>" . $user['Rights'] . "</td>
+                                <td>" . $user['UserID'] . "</td>
+                                <td>" . $user['Username'] . "</td>
+                                <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
+                                <td>" . $user['DateSignedUp'] . "</td>
+                                <td>" . $user['Rights'] . "</td>
                         <td><a href='#' class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
                         </tr>";
                     }

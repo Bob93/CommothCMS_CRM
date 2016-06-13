@@ -55,12 +55,18 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
-    public function user_delete() {
+    public function user_delete($id = null) {
         $user =  $this->model('user');
-
+        if($id != null) {
+            $user->deleteUser($id);
+        }
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-delete');
+
+        // Alle gebruikers ophalen met de functie get all users.
+        $all_users = $user->getAllUsers();
+
+        $this->view('cms-users/user-delete', ['users' => $all_users]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
