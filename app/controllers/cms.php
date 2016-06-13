@@ -8,10 +8,10 @@
 /* niet dingen echo'en in de controller maar in de view */
 
 class CMS extends Controller {
-    public $public_dir = "/COMMOTH CO-1.0/website/CommothCMS_CRM/public/";
+    public $public_dir = "/CommothCMS_CRM/public/";
 
     public function index($name = '', $otherName = '') {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
@@ -21,17 +21,22 @@ class CMS extends Controller {
 }
 
     public function user_overview() {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-overview');
+
+        // Alle gebruikers ophalen met de functie get all users.
+        $all_users = $user->getAllUsers();
+
+        // uit het array data de array ophalen van alle gebruikers.
+        $this->view('cms-users/user-overview', ['users' => $all_users]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
 
     public function user_edit() {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
@@ -41,7 +46,7 @@ class CMS extends Controller {
     }
 
     public function user_create() {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
@@ -51,7 +56,7 @@ class CMS extends Controller {
     }
 
     public function user_delete() {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
@@ -61,7 +66,7 @@ class CMS extends Controller {
     }
 
     public function user_suspend() {
-        $user =  $this->model('User');
+        $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view

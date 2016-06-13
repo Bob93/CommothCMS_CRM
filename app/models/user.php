@@ -29,6 +29,7 @@ class User extends Model{
 
     public function __construct($id = null)
     {
+        parent::__construct();
         if(!is_null($id)){
            $this->getAllUserById($id);
         }
@@ -57,24 +58,6 @@ class User extends Model{
                 $this->username = $row->username;
                 $this->id = $row->id;
 
-                // Door alle gebruikers van de database heen loopen.
-                foreach($row as $rows)
-                {
-                   echo  "<tr>" . $rows['UserID'] . "</tr>",
-                        "<tr>" . $rows['Firstname'] . "</tr>",
-                        "<tr>" . $rows['Insertion'] . "</tr>",
-                        "<tr>" . $rows['Lastname'] . "</tr>",
-                        "<tr>" . $rows['Username'] . "</tr>",
-                        "<tr>" . $rows['Phone'] . "</tr>",
-                        "<tr>" . $rows['Address'] . "</tr>",
-                        "<tr>" . $rows['Email'] . "</tr>",
-                        "<tr>" . $rows['Country'] . "</tr>",
-                        "<tr>" . $rows['Rights'] . "</tr>",
-                        "<tr>" . $rows['Active'] . "</tr>",
-                        "<tr>" . $rows['DateSignedUp'] . "</tr>",
-                        "<tr>" . $rows['LastLogin'] . "</tr>";
-                };
-
                 return $row;
             }
             else
@@ -89,6 +72,15 @@ class User extends Model{
 
     }
 
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM users";
+        $sth = $this->dbh->prepare($query);
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // selecteer 1 user op het id
     public function getSingleUserById($id = null)
     {
@@ -98,7 +90,7 @@ class User extends Model{
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
-            $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
+            $query = "SELECT Username FROM users WHERE Username='$username' limit 1";
             $result = $this->dbh->prepare($query);
             $result->execute();
             $value = $result->fetch(PDO::FETCH_OBJ);
