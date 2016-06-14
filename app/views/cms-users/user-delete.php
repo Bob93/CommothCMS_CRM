@@ -20,6 +20,7 @@
                 </thead>
                 <tbody>
                 <?php
+                    // alle data dat binnenkomt selecteren en laten zien wat wij willen laten zien. Verder het ID ophalen in de url.
                     foreach($data['users'] as $user)
                     {
                        echo "

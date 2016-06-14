@@ -24,8 +24,8 @@ class CMS extends Controller {
         $user =  $this->model('user');
 
         $this->view('cms-defaults/header');
-        //Versturen van data naar de view
 
+        //Versturen van data naar de view
         // Alle gebruikers ophalen met de functie get all users.
         $all_users = $user->getAllUsers();
 
@@ -57,12 +57,14 @@ class CMS extends Controller {
 
     public function user_delete($id = null) {
         $user =  $this->model('user');
+
+        // Kijken of het ID niet 0 is als die wordt gevraagd.
         if($id != null) {
             $user->deleteUser($id);
         }
+
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-
         // Alle gebruikers ophalen met de functie get all users.
         $all_users = $user->getAllUsers();
 

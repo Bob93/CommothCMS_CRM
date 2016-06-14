@@ -94,7 +94,7 @@
                                 <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
                                 <td>" . $user['DateSignedUp'] . "</td>
                                 <td>" . $user['Rights'] . "</td>
-                        <td><a href='#' class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
+                        <td><a href=\"/CommothCMS_CRM/public/cms/user_overview/".$user['UserID']."\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
                         </tr>";
                     }
                 ?>
