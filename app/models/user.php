@@ -82,6 +82,17 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // user wordt geselecteerd op wijze van id.
+    public function getUserById($id)
+    {
+        $query = "SELECT * FROM users WHERE UserID=:id";
+        $sth = $this->dbh->prepare($query);
+        $sth->bindParam(':id', $id);
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // check of de username al in gebruik is
     public function checkUsername($username)
     {
@@ -191,13 +202,26 @@ class User extends Model{
         try
         {
             // Updaten van de database, tabel users
-            $query = "UPDATE users SET `FirstName`=`$firstname` AND `Insertion`=`$insertion` AND `Lastname`=`$lastname` AND
-            `Username`=`$username` AND `Password`=`$new_hashed_password` AND `Phone`=`$phone` AND `Address`=`$address` AND
-            `Country`=`$country` AND `Email`=`$email` AND `Rights`=`$rights` AND `Active`=`$active` AND `IP`=`$ip` AND
-            `LastLogin`=NOW() AND `LastLocation`=NULL";
+            $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
+            Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
+            Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND IP=:ip AND
+            LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
             $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':id', $id);
+            $sth->bindParam(':firstname', $firstname);
+            $sth->bindParam(':insertion', $insertion);
+            $sth->bindParam(':lastname', $lastname);
+            $sth->bindParam(':username', $username);
+            $sth->bindParam(':password', $new_hashed_password);
+            $sth->bindParam(':phone', $phone);
+            $sth->bindParam(':address', $address);
+            $sth->bindParam(':country', $country);
+            $sth->bindParam(':email', $email);
+            $sth->bindParam(':rights', $rights);
+            $sth->bindParam(':active', $active);
+            $sth->bindParam(':ip', $ip);
             $sth->execute();
-            return $sth;
+            return true;
         }
         catch(Exception $e)
         {
@@ -209,7 +233,6 @@ class User extends Model{
     // gebruikt.
     public function deleteUser($id, $active = 0)
     {
-
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
             $query = "UPDATE users SET Active=:active WHERE UserId=:id";

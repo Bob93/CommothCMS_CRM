@@ -35,12 +35,19 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
-    public function user_edit() {
+    public function user_edit($id = null) {
         $user =  $this->model('user');
+
+        if($id != null)
+        {
+            $user->getUserById($id);
+        }
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-edit');
+        $all_users = $user->getAllUsers();
+
+        $this->view('cms-users/user-edit', ['users' => $all_users]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
@@ -59,7 +66,8 @@ class CMS extends Controller {
         $user =  $this->model('user');
 
         // Kijken of het ID niet 0 is als die wordt gevraagd.
-        if($id != null) {
+        if($id != null)
+        {
             $user->deleteUser($id);
         }
 
