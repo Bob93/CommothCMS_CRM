@@ -105,14 +105,14 @@
                     <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                     <ul>
-                        <li class="<?php echo ($this->GetCurrentPage() == "index") ? "current" : "" ?>"><a href="index"><div>Home</div></a></li>
-                        <li class="<?php echo (strlen(strstr($this->GetCurrentPage(),'user'))) ? "current" : "" ?>"><a href="user_overview"><div>Users</div></a>
+                        <li class="<?php echo ($this->GetCurrentPage() == "index") ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>cms/index"><div>Home</div></a></li>
+                        <li class="<?php echo (strlen(strstr($this->GetCurrentPage(),'user'))) ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>cms/user_overview"><div>Users</div></a>
                             <ul>
-                                <li><a href="user_overview"><div><i class="icon-stack"></i>Overview</div></a>
-                                <li><a href="user_create"><div><i class="icon-adjust"></i>Create User(s)</div></a></li>
-                                <li><a href="user_delete"><div><i class="icon-adjust"></i>Delete User(s)</div></a></li>
-                                <li><a href="user_edit"><div><i class="icon-wrench"></i>Edit User(s)</div></a></li>
-                                <li><a href="user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>cms/user_overview"><div><i class="icon-stack"></i>Overview</div></a>
+                                <li><a href="<?php  echo $this->public_dir ?>cms/user_create"><div><i class="icon-adjust"></i>Create User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>cms/user_delete"><div><i class="icon-adjust"></i>Delete User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>cms/user_edit"><div><i class="icon-wrench"></i>Edit User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>cms/user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><div>Pages</div></a>

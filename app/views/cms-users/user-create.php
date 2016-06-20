@@ -1,3 +1,13 @@
+<?php
+
+$data['userInfo'] = ['Tijs', 'Gietman', 'is', 'Baas', ' ', 'date'];
+
+foreach($data['userInfo'] as $item) {
+    echo $item;
+
+}
+
+?>
 <section id="content">
 
     <div class="content-wrap">
