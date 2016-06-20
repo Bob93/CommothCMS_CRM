@@ -9,7 +9,7 @@
 class User extends Model{
 
     public $id;
-    public $name = 'siisy';
+    public $name;
     public $firstname;
     public $insertion;
     public $lastname;
@@ -29,6 +29,7 @@ class User extends Model{
 
     public function __construct($id = null)
     {
+        parent::__construct();
         if(!is_null($id)){
            $this->getAllUserById($id);
         }
@@ -56,48 +57,48 @@ class User extends Model{
                 $this->name = $row->firstname . ' ' . $row->lastname;
                 $this->username = $row->username;
                 $this->id = $row->id;
-                return $this->id;
+
+                return $row;
+            }
+            else
+            {
+                return 'Het ophalen van de gebruiker is mislukt.';
             }
         }
         catch(Exception $e)
         {
-            return 'Het ophalen van de gebruikers is niet gelukt! ' . $e;
+            return 'Het ophalen van de gebruiker is niet gelukt! ' . $e;
         }
+
     }
 
-    // selecteer 1 user op het id
-    public function getSingleUserById($id = null)
+    // alle users opgehaald uit de users tabel
+    public function getAllUsers()
     {
-        session_start();
-        $username = $_GET['username'];
+        $query = "SELECT * FROM users WHERE Active = 1";
+        $sth = $this->dbh->prepare($query);
+        $sth->execute();
 
-        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
-        try
-        {
-            $query = "SELECT UserID FROM users WHERE Username='$username' limit 1";
-            $result = $this->dbh->prepare($query);
-            $result->execute();
-            $value = $result->fetch(PDO::FETCH_OBJ);
-            $_SESSION['id'] = $value->id;
-        }
-        catch(Exception $e)
-        {
-            echo 'Het ophalen van de gebruiker is niet gelukt! ' . $e;
-        }
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        $this->id = $_SESSION['id'];
+    // user wordt geselecteerd op wijze van id.
+    public function getUserById($id)
+    {
+        $query = "SELECT * FROM users WHERE UserID=:id";
+        $sth = $this->dbh->prepare($query);
+        $sth->bindParam(':id', $id);
+        $sth->execute();
 
-        if($this->id < 1)
-        {
-            session_destroy();
-        }
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // check of de username al in gebruik is
     public function checkUsername($username)
     {
-        $query = "SELECT Username FROM users WHERE Username=`$username`";
+        $query = "SELECT Username FROM users WHERE Username=:username";
         $sth = $this->dbh->prepare($query);
+        $sth->bindParam(':username', $username);
         $sth->execute($query);
 
         if($_SESSION['username'] == $username)
@@ -159,7 +160,7 @@ class User extends Model{
         try
         {
             // insertion query met prepare en execute statments
-            $query = "INSERT INTO users (`Firstname`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
+            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
           `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
           `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
           `$active`, `$ip`, `$registrationip`, NOW(), NOW(), NULL )";
@@ -201,13 +202,26 @@ class User extends Model{
         try
         {
             // Updaten van de database, tabel users
-            $query = "UPDATE users SET `Firstname`=`$firstname` AND `Insertion`=`$insertion` AND `Lastname`=`$lastname` AND
-            `Username`=`$username` AND `Password`=`$new_hashed_password` AND `Phone`=`$phone` AND `Address`=`$address` AND
-            `Country`=`$country` AND `Email`=`$email` AND `Rights`=`$rights` AND `Active`=`$active` AND `IP`=`$ip` AND
-            `LastLogin`=NOW() AND `LastLocation`=NULL";
+            $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
+            Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
+            Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND IP=:ip AND
+            LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
             $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':id', $id);
+            $sth->bindParam(':firstname', $firstname);
+            $sth->bindParam(':insertion', $insertion);
+            $sth->bindParam(':lastname', $lastname);
+            $sth->bindParam(':username', $username);
+            $sth->bindParam(':password', $new_hashed_password);
+            $sth->bindParam(':phone', $phone);
+            $sth->bindParam(':address', $address);
+            $sth->bindParam(':country', $country);
+            $sth->bindParam(':email', $email);
+            $sth->bindParam(':rights', $rights);
+            $sth->bindParam(':active', $active);
+            $sth->bindParam(':ip', $ip);
             $sth->execute();
-            return $sth;
+            return true;
         }
         catch(Exception $e)
         {
@@ -219,19 +233,20 @@ class User extends Model{
     // gebruikt.
     public function deleteUser($id, $active = 0)
     {
-        $this->getSingleUserById($id);
-
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
-            $query = "UPDATE users SET `Active`=`$active`";
-            $sth = $this->dhb->prepare($query);
+            $query = "UPDATE users SET Active=:active WHERE UserId=:id";
+            $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':active', $active);
+            $sth->bindParam(':id', $id);
             $sth->execute();
-            return $sth;
+            return true;
         }
         catch(Exception $e)
         {
             return 'De gebruiker is niet verwijderd! ' . $e;
         }
+        return false;
     }
 
 

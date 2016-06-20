@@ -165,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Rights` tinyint(2) DEFAULT NULL,
   `Active` tinyint(2) DEFAULT NULL,
   `BanTime` datetime NOT NULL,
-  `IP` bit(16) DEFAULT NULL,
-  `RegistrationIP` bit(16) NOT NULL,
+  `IP` varchar(30) DEFAULT NULL,
+  `RegistrationIP` varchar(30) NOT NULL,
   `DateSignedUp` datetime DEFAULT NULL,
   `LastLogin` datetime DEFAULT NULL,
   `LastLocation` geometry DEFAULT NULL

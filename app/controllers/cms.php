@@ -42,15 +42,11 @@ class CMS extends Controller {
 
     public function user_create() {
         $user =  $this->model('User');
-        $userinfo = array();
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        //$this->view('cms-users/user-create');
-        $this->view('cms-users/user-create', [ 'userInfo'=> $userinfo ]);
-        $user->name = $userinfo[1];
-        var_dump($userinfo);
-
+        $this->view('cms-users/user-create');
+        //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
 

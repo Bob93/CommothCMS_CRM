@@ -20,37 +20,37 @@
 
                                 <div class="col_half">
                                     <label for="edit-form-firstname">First Name:</label>
-                                    <input type="text" id="edit-form-firstname" name="edit-form-name" value="" class="form-control" />
+                                    <input type="text" id="edit-form-firstname" name="firstname" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-insertion">Insertion:</label>
-                                    <input type="text" id="edit-form-insertion" name="edit-form-name" value="" class="form-control" />
+                                    <input type="text" id="edit-form-insertion" name="insertion" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half">
                                     <label for="edit-form-lastname">Last Name:</label>
-                                    <input type="text" id="edit-form-lastname" name="edit-form-lastname" value="" class="form-control" />
+                                    <input type="text" id="edit-form-lastname" name="lastname" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-email">Email Address:</label>
-                                    <input type="text" id="edit-form-email" name="edit-form-email" value="" class="form-control" />
+                                    <input type="text" id="edit-form-email" name="email" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half">
                                     <label for="edit-form-country">Country:</label>
-                                    <input type="text" id="edit-form-country" name="edit-form-country" value="" class="form-control" />
+                                    <input type="text" id="edit-form-country" name="country" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-address">Address:</label>
-                                    <input type="text" id="edit-form-address" name="edit-form-address" value="" class="form-control" />
+                                    <input type="text" id="edit-form-address" name="address" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half">
                                     <label for="edit-form-phone">Phone:</label>
-                                    <input type="text" id="edit-form-phone" name="edit-form-phone" value="" class="form-control" />
+                                    <input type="text" id="edit-form-phone" name="phone" value="" class="form-control" />
                                 </div>
 
                                 <div class="line"></div>
@@ -60,34 +60,34 @@
 
                                 <div class="col_half">
                                     <label for="edit-form-username">Choose a Username:</label>
-                                    <input type="text" id="edit-form-username" name="edit-form-username" value="" class="form-control" />
+                                    <input type="text" id="edit-form-username" name="username" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-rights">Rights:</label>
-                                    <input type="text" id="edit-form-rights" name="edit-form-rights" value="" class="form-control" />
+                                    <input type="text" id="edit-form-rights" name="rights" value="" class="form-control" />
                                 </div>
 
                                 <div class="clear"></div>
 
                                 <div class="col_half">
                                     <label for="edit-form-password">Choose Password:</label>
-                                    <input type="password" id="edit-form-password" name="edit-form-password" value="" class="form-control" />
+                                    <input type="password" id="edit-form-password" name="password" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-repassword">Re-enter Password:</label>
-                                    <input type="password" id="edit-form-repassword" name="edit-form-repassword" value="" class="form-control" />
+                                    <input type="password" id="edit-form-repassword" name="repassword" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half">
                                     <label for="edit-form-active">Active:</label>
-                                    <input type="text" id="edit-form-active" name="edit-form-active" value="" class="form-control" />
+                                    <input type="text" id="edit-form-active" name="active" value="" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-bantime">Ban Time:</label>
-                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="" class="form-control" />
+                                    <input type="text" id="edit-form-bantime" name="bantime" value="" class="form-control" />
                                 </div>
 
                                 <div class="clear"></div>

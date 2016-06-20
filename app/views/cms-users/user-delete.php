@@ -14,31 +14,27 @@
                     <th>Username</th>
                     <th>Full Name</th>
                     <th>Register Date</th>
+                    <th>Rights</th>
                     <th>Modify</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark Otto</td>
-                    <td>markinator66</td>
-                    <td>10-15-2016 21:00</td>
-                    <td><a href="#" class="button button-3d button-mini button-rounded button-amber">Delete</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob Thornton</td>
-                    <td>thommy23</td>
-                    <td>10-15-2016 21:00</td>
-                    <td><a href="#" class="button button-3d button-mini button-rounded button-amber">Delete</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>larzybird</td>
-                    <td>10-15-2016 21:00</td>
-                    <td><a href="#" class="button button-3d button-mini button-rounded button-amber">Delete</a></td>
-                </tr>
+                <?php
+                    // alle data dat binnenkomt selecteren en laten zien wat wij willen laten zien. Verder het ID ophalen in de url.
+                    foreach($data['users'] as $user)
+                    {
+                       echo "
+                        <tr>
+                            <td>" . $user['UserID'] . "</td>
+                            <td>" . $user['Username'] . "</td>
+                            <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
+                            <td>" . $user['DateSignedUp'] . "</td>
+                            <td>" . $user['Rights'] . "</td>
+                            <td><a href=\"/CommothCMS_CRM/public/cms/user_delete/".$user['UserID']."\" class=\"button button-3d button-mini button-rounded button-amber\">Delete</a></td>
+                        </tr>
+                       ";
+                    }
+                ?>
                 </tbody>
             </table>
 
