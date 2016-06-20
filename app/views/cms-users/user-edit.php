@@ -4,7 +4,7 @@
 
             <div class="row">
 
-                <div class="col-md-8 bottommargin">
+                <div class="col-md-12 bottommargin">
 
                     <div class="col_full bottommargin-lg clearfix">
 
@@ -12,7 +12,7 @@
                             <h3>Edit User</h3>
                         </div>
 
-                        <div class="col_two_third nobottommargin">
+                        <div class="col-md-12 nobottommargin">
 
                             <h3>Personal Details</h3>
 
@@ -96,7 +96,7 @@
                                 <div class="clear"></div>
 
                                 <div class="col_full nobottommargin center">
-                                    <button class="button button-desc button-3d button-rounded button-green center" id="edit-form-submit" name="edit-form-submit" value="edit" type="submit">Update User</button>
+                                    <button class="button button-desc button-3d button-rounded button-green center" id="edit-form-submit" name="submit" value="edit" type="submit">Update User</button>
                                 </div>
 
 
@@ -109,61 +109,8 @@
 
                 </div>
 
-                <div class="col-md-4">
-
-                    <div class="line hidden-lg hidden-md"></div>
-
-                    <div class="sidebar-widgets-wrap clearfix">
-
-                        <div class="widget widget_links clearfix">
-
-                            <h4>Search Users</h4>
-                            <div class="col_three_fifth">
-                                <label for="search-form-edit-user">Username:</label>
-                                <input type="text" id="search-form-edit-user" name="search-form-edit-user" value="" class="form-control" />
-                            </div>
-
-                            <div class="col_half nobottommargin">
-                                <ul>
-                                    <li><a href="#">World</a></li>
-                                    <li><a href="#">Technology</a></li>
-                                    <li><a href="#">Entertainment</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Media</a></li>
-                                    <li><a href="#">Politics</a></li>
-                                    <li><a href="#">Business</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                            <ul class="pagination">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
             </div>
 
         </div>
-
-    </div>
 
 </section><!-- #content end -->
