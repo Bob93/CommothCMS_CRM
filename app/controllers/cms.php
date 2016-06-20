@@ -7,7 +7,7 @@
  */
 /* niet dingen echo'en in de controller maar in de view */
 class CMS extends Controller {
-    public $public_dir = "/CommothCMS_CRM/public/";
+    public $public_dir = "/COMMOTH%20CO-1.0/website/CommothCMS_CRM/public/";
 
     public function index($name = '', $otherName = '') {
         $user =  $this->model('user');
@@ -54,9 +54,10 @@ class CMS extends Controller {
     public function user_create() {
         $user =  $this->model('user');
 
+
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-create');
+        $this->view('cms-users/user-create', ['users' => $user]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
