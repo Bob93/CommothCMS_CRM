@@ -6,7 +6,6 @@
  * Time: 12:57
  */
 /* niet dingen echo'en in de controller maar in de view */
-
 class CMS extends Controller {
     public $public_dir = "/CommothCMS_CRM/public/";
 
@@ -18,7 +17,7 @@ class CMS extends Controller {
         $this->view('cms/index');
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
-}
+    }
 
     public function user_overview() {
         $user =  $this->model('user');
@@ -45,7 +44,7 @@ class CMS extends Controller {
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $all_users = $user->getAllUsers();
+        $all_users = $user->getUserById($id);
 
         $this->view('cms-users/user-edit', ['users' => $all_users]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);

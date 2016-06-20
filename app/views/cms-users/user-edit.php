@@ -16,11 +16,11 @@
 
                             <h3>Personal Details</h3>
 
-                            <form id="edit-form" name="edit-form" class="nobottommargin" action="#" method="post">
+                            <form id="edit-form" name="edit-form" class="nobottommargin" action="" method="post">
 
                                 <div class="col_half">
                                     <label for="edit-form-firstname">First Name:</label>
-                                    <input type="text" id="edit-form-firstname" name="firstname" value="" class="form-control" />
+                                    <input type="text" id="edit-form-firstname" name="firstname" value="<?php $data['FirstName']; ?>" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
@@ -93,7 +93,7 @@
                                 <div class="clear"></div>
 
                                 <div class="col_full nobottommargin center">
-                                    <button class="button button-desc button-3d button-rounded button-green center" id="edit-form-submit" name="edit-form-submit" value="edit">Update User</button>
+                                    <button class="button button-desc button-3d button-rounded button-green center" id="edit-form-submit" name="edit-form-submit" value="edit" type="submit">Update User</button>
                                 </div>
 
 
