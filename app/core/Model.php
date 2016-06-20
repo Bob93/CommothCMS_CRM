@@ -5,8 +5,7 @@ class Model {
     public $dbh = null;
 
     public function __construct() {
-        $this->dbh = new PDO('mysql:host=localhost;dbname=cmsdata', 'root', '');
-        return $this->dbh;
+        $this->dbh = new PDO('mysql:host=localhost;dbname=cmsdata', 'root', 'root');
     }
 
     public function CloseDB() {

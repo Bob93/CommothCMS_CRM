@@ -8,7 +8,7 @@
 /* niet dingen echo'en in de controller maar in de view */
 
 class Home extends Controller {
-    public $public_dir = "/COMMOTH CO-1.0/website/CommothCMS_CRM/public/";
+    public $public_dir = "/CommothCMS_CRM/public/";
 
     public function index($name = '', $otherName = '') {
         $user =  $this->model('User');

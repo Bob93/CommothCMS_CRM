@@ -161,16 +161,16 @@ class User extends Model{
         {
             // insertion query met prepare en execute statments
             $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
-          `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
+          `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
           `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
-          `$active`, `$ip`, `$registrationip`, NOW(), NOW(), NULL )";
+          `$active`, NULL ,`$ip`, `$registrationip`, NOW(), NOW(), NULL )";
             $sth = $this->dbh->prepare($query);
             $sth->execute();
-            return $sth;
+            return true;
         }
         catch(Exception $e)
         {
-            return 'Het nieuwe account is niet aangemaakt! ' . $e;
+            return 'Het nieuwe account is niet aangemaakt! ' . $e->getMessage();
         }
     }
 
@@ -204,7 +204,7 @@ class User extends Model{
             // Updaten van de database, tabel users
             $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
             Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
-            Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND IP=:ip AND
+            Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND BanTime=NULL AND IP=:ip AND
             LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':id', $id);
@@ -225,7 +225,7 @@ class User extends Model{
         }
         catch(Exception $e)
         {
-            return 'Er is iets fout gegaan in de verwerking! ' . $e;
+            return 'Er is iets fout gegaan in de verwerking! ' . $e->getMessage();
         }
     }
 
@@ -244,9 +244,8 @@ class User extends Model{
         }
         catch(Exception $e)
         {
-            return 'De gebruiker is niet verwijderd! ' . $e;
+            return 'De gebruiker is niet verwijderd! ' . $e->getMessage();
         }
-        return false;
     }
 
 
