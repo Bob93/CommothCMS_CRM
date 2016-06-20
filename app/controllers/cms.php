@@ -70,8 +70,9 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
-    public function user_delete($id = null) {
+    public function user_delete($offset = 0, $id = null) {
         $user =  $this->model('user');
+
 
         // Kijken of het ID niet 0 is als die wordt gevraagd.
         if($id != null)
@@ -82,9 +83,10 @@ class CMS extends Controller {
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
         // Alle gebruikers ophalen met de functie get all users.
-        $all_users = $user->getAllUsers();
+        $all_users = $user->getAllUsers($offset);
+        $count = $user->countAllUsers();
 
-        $this->view('cms-users/user-delete', ['users' => $all_users]);
+        $this->view('cms-users/user-delete', ['users' => $all_users, 'count' => $count, 'offset' => $offset]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
