@@ -33,7 +33,7 @@
 
 <!-- Footer Scripts
 ============================================= -->
-<script type="text/javascript" src="<?php  echo $this->public_dir  ?>js/functions.js"></script>
+<script type="text/javascript" src="<?php  echo Config::$public_dir  ?>js/functions.js"></script>
 
 </body>
 </html>

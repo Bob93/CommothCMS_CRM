@@ -7,7 +7,12 @@
  */
 /* niet dingen echo'en in de controller maar in de view */
 class CMS extends Controller {
-    public $public_dir = "/COMMOTH%20CO-1.0/website/CommothCMS_CRM/public/";
+    public $public_dir = '';
+
+    public function __construct()
+    {
+        $this->public_dir = Config::$public_dir . 'cms/';
+    }
 
     public function index($name = '', $otherName = '') {
         $user =  $this->model('user');
@@ -19,17 +24,20 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
-    public function user_overview() {
+    public function user_overview($offset = 0) {
         $user =  $this->model('user');
+
 
         $this->view('cms-defaults/header');
 
         //Versturen van data naar de view
         // Alle gebruikers ophalen met de functie get all users.
-        $all_users = $user->getAllUsers();
+        $all_users = $user->getAllUsers($offset);
+
+        $count = $user->countAllUsers();
 
         // uit het array data de array ophalen van alle gebruikers.
-        $this->view('cms-users/user-overview', ['users' => $all_users]);
+        $this->view('cms-users/user-overview', ['users' => $all_users, 'count' => $count, 'offset' => $offset]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }

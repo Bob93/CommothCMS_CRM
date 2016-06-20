@@ -9,14 +9,14 @@
     ============================================= -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/style.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/dark.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/font-icons.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/style.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/dark.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/font-icons.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/magnific-popup.css" type="text/css" />
 
-    <link rel="stylesheet" href="<?php echo $this->public_dir ?>css/responsive.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo Config::$public_dir ?>css/responsive.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -24,8 +24,8 @@
 
     <!-- External JavaScripts
     ============================================= -->
-    <script type="text/javascript" src="<?php echo $this->public_dir ?>js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo $this->public_dir ?>js/plugins.js"></script>
+    <script type="text/javascript" src="<?php echo Config::$public_dir ?>js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo Config::$public_dir ?>js/plugins.js"></script>
 
     <!-- Document Title
     ============================================= -->
@@ -88,8 +88,8 @@
             <!-- Logo
             ============================================= -->
             <div id="logo">
-                <a href="index.html" class="standard-logo" data-dark-logo="<?php echo $this->public_dir ?>images/logo-dark.png"><img src="<?php echo $this->public_dir ?>images/logo.png" alt="Canvas Logo"></a>
-                <a href="index.html" class="retina-logo" data-dark-logo="<?php echo $this->public_dir ?>images/logo-dark@2x.png"><img src="<?php echo $this->public_dir ?>images/logo@2x.png" alt="Canvas Logo"></a>
+                <a href="index.html" class="standard-logo" data-dark-logo="<?php echo Config::$public_dir ?>images/logo-dark.png"><img src="<?php echo Config::$public_dir ?>images/logo.png" alt="Canvas Logo"></a>
+                <a href="index.html" class="retina-logo" data-dark-logo="<?php echo Config::$public_dir ?>images/logo-dark@2x.png"><img src="<?php echo Config::$public_dir ?>images/logo@2x.png" alt="Canvas Logo"></a>
             </div><!-- #logo end -->
 
         </div>
@@ -105,14 +105,14 @@
                     <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                     <ul>
-                        <li class="<?php echo ($this->GetCurrentPage() == "index") ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>cms/index"><div>Home</div></a></li>
-                        <li class="<?php echo (strlen(strstr($this->GetCurrentPage(),'user'))) ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>cms/user_overview"><div>Users</div></a>
+                        <li class="<?php echo ($this->GetCurrentPage() == "index") ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>index"><div>Home</div></a></li>
+                        <li class="<?php echo (strlen(strstr($this->GetCurrentPage(),'user'))) ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>user_overview"><div>Users</div></a>
                             <ul>
-                                <li><a href="<?php  echo $this->public_dir ?>cms/user_overview"><div><i class="icon-stack"></i>Overview</div></a>
-                                <li><a href="<?php  echo $this->public_dir ?>cms/user_create"><div><i class="icon-adjust"></i>Create User(s)</div></a></li>
-                                <li><a href="<?php  echo $this->public_dir ?>cms/user_delete"><div><i class="icon-adjust"></i>Delete User(s)</div></a></li>
-                                <li><a href="<?php  echo $this->public_dir ?>cms/user_edit"><div><i class="icon-wrench"></i>Edit User(s)</div></a></li>
-                                <li><a href="<?php  echo $this->public_dir ?>cms/user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>user_overview"><div><i class="icon-stack"></i>Overview</div></a>
+                                <li><a href="<?php  echo $this->public_dir ?>user_create"><div><i class="icon-adjust"></i>Create User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>user_delete"><div><i class="icon-adjust"></i>Delete User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>user_edit"><div><i class="icon-wrench"></i>Edit User(s)</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><div>Pages</div></a>

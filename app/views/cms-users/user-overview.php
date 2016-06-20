@@ -94,22 +94,24 @@
                                 <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
                                 <td>" . $user['DateSignedUp'] . "</td>
                                 <td>" . $user['Rights'] . "</td>
-                        <td><a href=\"/CommothCMS_CRM/public/cms/user_edit/".$user['UserID']."\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
+                        <td><a href=\"user_edit/".$user['UserID']."\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
                         </tr>";
                     }
                 ?>
                 </tbody>
             </table>
-
             <div class="center">
                 <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
+            <?php
+
+            $usercount = $data['count'];
+            $pagecount = $usercount / 10;
+            for($i = 0; $i <= $pagecount;$i++){
+                echo '<li><a href="'.$this->public_dir.'user_overview/'.$i.'">'.($i + 1).'</a></li>';
+            }
+
+
+            ?>
                 </ul>
             </div>
 

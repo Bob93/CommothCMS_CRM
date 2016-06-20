@@ -73,13 +73,23 @@ class User extends Model{
     }
 
     // alle users opgehaald uit de users tabel
-    public function getAllUsers()
+    public function getAllUsers($offset = 0)
     {
+        $offset = $offset * 10;
+        $query = "SELECT * FROM users WHERE Active = 1 LIMIT 9 OFFSET :offset";
+        $sth = $this->dbh->prepare($query);
+        $sth->bindValue(':offset',(int) $offset, PDO::PARAM_INT );
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countAllUsers() {
         $query = "SELECT * FROM users WHERE Active = 1";
         $sth = $this->dbh->prepare($query);
         $sth->execute();
 
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $sth->rowCount();
     }
 
     // user wordt geselecteerd op wijze van id.
@@ -99,9 +109,9 @@ class User extends Model{
         $query = "SELECT Username FROM users WHERE Username=:username";
         $sth = $this->dbh->prepare($query);
         $sth->bindParam(':username', $username);
-        $sth->execute($query);
+        $sth->execute();
 
-        if($_SESSION['username'] == $username)
+        if($sth->rowCount() >= 1)
         {
             return false;
         }
@@ -112,35 +122,30 @@ class User extends Model{
     }
 
     // check of het wachtwoord overeen komt
-    public function checkPassword()
+    public function checkPassword($password, $password_redo)
     {
-        $password = $_GET['password'];
+        $hashed_password = md5($password);
 
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-        $password = $_GET['password'];
-
-        $check_hash = password_hash($password, PASSWORD_BCRYPT);
+        $check_hash = md5($password_redo);
 
         if($hashed_password == $check_hash)
         {
-            return 'Ingevulde wachtwoorden komen overeen en zijn geaccepteerd';
+            return true;
         }
         else
         {
-           return 'De wachtwoorden komen niet overeen! Vul het opnieuw in!';
+           return false;
         }
     }
 
     // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
-    public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
-        $registrationip)
+    public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email)
     {
         $rights = 0;
         $active = 1;
 
         // hashen van het password
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        $hashed_password = md5($password);
 
         // client ip adres opvragen
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
@@ -160,11 +165,27 @@ class User extends Model{
         try
         {
             // insertion query met prepare en execute statments
-            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
-          `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
-          `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
-          `$active`, NULL ,`$ip`, `$registrationip`, NOW(), NOW(), NULL )";
+            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`)
+VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password', '$phone', '$address', '$country', '$email', '$rights', '$active', NOW() , '$ip', '$ip', NOW(), NULL, NULL )";
+
+//            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
+//          `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
+//          `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
+//          `$active`, NULL ,`$ip`, `$ip`, NOW(), NOW(), NULL )";
+
             $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':firstname', $firstname);
+            $sth->bindParam(':insertion', $insertion);
+            $sth->bindParam(':lastname', $lastname);
+            $sth->bindParam(':username', $username);
+            $sth->bindParam(':password', $hashed_password);
+            $sth->bindParam(':phone', $phone);
+            $sth->bindParam(':address', $address);
+            $sth->bindParam(':country', $country);
+            $sth->bindParam(':email', $email);
+            $sth->bindParam(':rights', $rights);
+            $sth->bindParam(':active', $active);
+            $sth->bindParam(':ip', $ip);
             $sth->execute();
             return true;
         }
