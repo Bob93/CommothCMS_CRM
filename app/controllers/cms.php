@@ -54,7 +54,7 @@ class CMS extends Controller {
         //Versturen van data naar de view
         $all_users = $user->getUserById($id);
 
-        $this->view('cms-users/user-edit', ['users' => $all_users]);
+        $this->view('cms-users/user-edit', ['users' => $all_users, 'function' => $user]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }

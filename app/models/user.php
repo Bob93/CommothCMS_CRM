@@ -227,25 +227,12 @@ class User extends Model{
         try
         {
             // Updaten van de database, tabel users
-            $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
-                Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
-                Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND BanTime=:bantime AND IP=:ip AND RegistrationIP=:ip AND
-                DateSignedUp=NOW() AND LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
+            $query = "UPDATE users SET FirstName='.$firstname.', Insertion='.$insertion.', Lastname='.$lastname.',
+                Username='.$username.', Password='.$hashed_password.', Phone='.$phone.', Address='.$address.',
+                Country='.$country.', Email='.$email.', Rights='.$rights.', Active='.$active.', BanTime='.$bantime.', IP='.$ip.',
+                RegistrationIP='.$ip.', DateSignedUp=NOW(), LastLogin=NOW(), LastLocation=NULL WHERE UserID=:id";
 
             $sth = $this->dbh->prepare($query);
-            $sth->bindParam(':firstname', $firstname);
-            $sth->bindParam(':insertion', $insertion);
-            $sth->bindParam(':lastname', $lastname);
-            $sth->bindParam(':username', $username);
-            $sth->bindParam(':password', $hashed_password);
-            $sth->bindParam(':phone', $phone);
-            $sth->bindParam(':address', $address);
-            $sth->bindParam(':country', $country);
-            $sth->bindParam(':email', $email);
-            $sth->bindParam(':rights', $rights);
-            $sth->bindParam(':active', $active);
-            $sth->bindParam(':bantime', $bantime);
-            $sth->bindParam(':ip', $ip);
             $sth->bindParam(':id', $id);
             $sth->execute();
             return true;
