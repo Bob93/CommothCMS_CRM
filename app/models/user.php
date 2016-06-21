@@ -175,13 +175,10 @@ class User extends Model{
         try
         {
             // insertion query met prepare en execute statments
-            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`)
-VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password', '$phone', '$address', '$country', '$email', '$rights', '$active', NOW() , '$ip', '$ip', NOW(), NULL, NULL )";
-
-//            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`, `Phone`, `Address`,
-//          `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`, `LastLogin`, `LastLocation`) VALUES (`$firstname`,
-//          `$insertion`, `$lastname`, `$username`, `$hashed_password`, `$phone`, `$address`, `$country`, `$email`, `$rights`,
-//          `$active`, NULL ,`$ip`, `$ip`, NOW(), NOW(), NULL )";
+            $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`,
+                `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`,
+                `LastLogin`, `LastLocation`) VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password',
+                '$phone', '$address', '$country', '$email', '$rights', '$active', NOW() , '$ip', '$ip', NOW(), NULL, NULL )";
 
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':firstname', $firstname);
@@ -206,14 +203,11 @@ VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password'
     }
 
     // aanpassingen van een gebruiker
-    public function updateUser($id, $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
-                               $active)
+    public function updateUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
+                               $active, $bantime)
     {
-        // get het id van de gebruiker
-        $this->getAllUserById($id);
-
         // het nieuwe of aangepaste wachtwoord opnieuw hashen voor het wordt opgeslagen.
-        $new_hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        $hashed_password = md5($password);
 
         // client ip adres opvragen
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
@@ -234,23 +228,25 @@ VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password'
         {
             // Updaten van de database, tabel users
             $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
-            Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
-            Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND BanTime=NULL AND IP=:ip AND
-            LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
+                Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
+                Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND BanTime=:bantime AND IP=:ip AND RegistrationIP=:ip AND
+                DateSignedUp=NOW() AND LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
+
             $sth = $this->dbh->prepare($query);
-            $sth->bindParam(':id', $id);
             $sth->bindParam(':firstname', $firstname);
             $sth->bindParam(':insertion', $insertion);
             $sth->bindParam(':lastname', $lastname);
             $sth->bindParam(':username', $username);
-            $sth->bindParam(':password', $new_hashed_password);
+            $sth->bindParam(':password', $hashed_password);
             $sth->bindParam(':phone', $phone);
             $sth->bindParam(':address', $address);
             $sth->bindParam(':country', $country);
             $sth->bindParam(':email', $email);
             $sth->bindParam(':rights', $rights);
             $sth->bindParam(':active', $active);
+            $sth->bindParam(':bantime', $bantime);
             $sth->bindParam(':ip', $ip);
+            $sth->bindParam(':id', $id);
             $sth->execute();
             return true;
         }
