@@ -110,7 +110,6 @@
                             <ul>
                                 <li><a href="<?php  echo $this->public_dir ?>user_overview"><div><i class="icon-stack"></i>Overview</div></a>
                                 <li><a href="<?php  echo $this->public_dir ?>user_create"><div><i class="icon-adjust"></i>Create User(s)</div></a></li>
-                                <li><a href="<?php  echo $this->public_dir ?>user_delete"><div><i class="icon-adjust"></i>Delete User(s)</div></a></li>
                                 <li><a href="<?php  echo $this->public_dir ?>user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
                             </ul>
                         </li>

@@ -91,6 +91,11 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
+    public function user_search($term = null){
+        $user =  $this->model('user');
+        echo json_encode($user->searchUsers($term));
+    }
+
     public function user_suspend() {
         $user =  $this->model('user');
 

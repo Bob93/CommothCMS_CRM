@@ -1,3 +1,11 @@
+<?php
+
+if(isset($_POST['search-submit'])) {
+    $data['users']->searchUsers['edit-form-search'];
+}
+
+?>
+
 <section id="content">
 
     <div class="content-wrap">
@@ -72,15 +80,49 @@
                 <h3>All Users</h3>
             </div>
 
-            <table class="table table-hover table-no-padding">
+            <div class="col_full center">
+                <form method="POST">
+                    <label for="edit-form-search">Search:</label>
+                    <input type="text" id="edit-form-search" name="edit-form-search" placeholder="Search Term" class="form-control" />
+                </form>
+            </div>
+
+            <script>
+                $(document).ready(function()
+                {
+                $( "#edit-form-search" ).on('change keyup paste click', function() {
+                        var flickerAPI = "<?php  echo $this->public_dir ?>user_search/" + $('#edit-form-search').val();
+                        $.ajax({
+                            type: "POST",
+                            url: flickerAPI,
+                            dataType: "JSON",
+                            cache: false,
+                            success: function (result) {
+                                $("tr > td").remove();
+                                $(result).each(function (index, value) {
+                                    $("#table-overview").append("<tr><td>" + result[index]['UserID'] + "</td><td>" + result[index]['Username'] + "</td><td>" + result[index]['FirstName'] + " " +  result[index]['Lastname'] + "</td><td>" +  result[index]['DateSignedUp'] + "</td>" +
+                                        "<td><a href=\"user_edit/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a>"
+                                        + "<td><a href=\"user_delete/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Delete</a>");
+                                });
+                                console.log(result[0]['FirstName']);
+                            },
+                            error: function (req, status, error) {
+                                console.log("ERROR:" + error.toString() + " " + status + " " + req.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <table class="table table-hover table-no-padding" id="table-overview">
                 <thead>
                 <tr>
                     <th>UserID</th>
                     <th>Username</th>
                     <th>Full Name</th>
                     <th>Register Date</th>
-                    <th>Rights</th>
                     <th>Modify</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -93,8 +135,8 @@
                                 <td>" . $user['Username'] . "</td>
                                 <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
                                 <td>" . $user['DateSignedUp'] . "</td>
-                                <td>" . $user['Rights'] . "</td>
-                        <td><a href=\"user_edit/".$user['UserID']."\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
+                        <td><a href=\"" . $this->public_dir . "user_edit/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
+                        <td><a href=\"" . $this->public_dir . "user_delete/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-red'>Delete</a></td>
                         </tr>";
                     }
                 ?>

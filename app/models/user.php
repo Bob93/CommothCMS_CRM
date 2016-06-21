@@ -84,6 +84,16 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function searchUsers($term = null) {
+        $term = "%$term%";
+        $query = "SELECT * FROM `users` WHERE Lastname LIKE :term OR FirstName LIKE :term OR Username LIKE :term";
+        $sth = $this->dbh->prepare($query);
+        $sth->bindParam(':term', $term);
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function countAllUsers() {
         $query = "SELECT * FROM users WHERE Active = 1";
         $sth = $this->dbh->prepare($query);
