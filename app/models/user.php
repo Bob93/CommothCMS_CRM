@@ -84,6 +84,12 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+//    public function joost($a, $b)
+//    {
+//        $result = $this->dataHandler->prepare("INSERT INTO joost(a, b) VALUES(?, ?)");
+//        $result->execute(array($a, $b));
+//    }
+
     public function searchUsers($term = null) {
         $term = "%$term%";
         $query = "SELECT * FROM `users` WHERE Lastname LIKE :term OR FirstName LIKE :term OR Username LIKE :term";
@@ -275,16 +281,76 @@ class User extends Model{
         }
     }
 
-    public function suspendUser($id, $reason, $bantime, $ipban = false)
+    public function checkIfUserSuspended($id) {
+        if(!$id == null) {
+            $query = "SELECT BanDuration FROM bans WHERE UserID=:id";
+            $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':id', $id);
+            $sth->execute();
+
+            if($sth->rowCount() >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function getBanData($id) {
+        $query = "SELECT * FROM bans WHERE UserID = :id";
+        $sth = $this->dbh->prepare($query);
+        $sth->bindParam(':id', $id);
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function suspendUser($id, $reason, $bantime, $ipban = 0, $bannedip = null)
     {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
-            $query = "UPDATE users SET Ban=:active WHERE UserId=:id";
-            $sth = $this->dbh->prepare($query);
-            $sth->bindParam(':active', $active);
-            $sth->bindParam(':id', $id);
-            $sth->execute();
-            return true;
+            if(!$id == null) {
+                $active = 0;
+                if($ipban == false) {
+                    $query = "UPDATE users SET RegularBan=:regularban, Active=:active WHERE UserId=:id";
+                } else {
+                    $query = "UPDATE users SET IPBanned=:ipban, Active=:active WHERE UserId=:id";
+                }
+
+                $sth = $this->dbh->prepare($query);
+
+                if($ipban == false) {
+                    $regularban = true;
+                    $sth->bindParam(':regularban', $regularban);
+                } else {
+                    $ipban = true;
+                    $sth->bindParam(':ipban', $ipban);
+                }
+                $sth->bindParam(':active', $active);
+                $sth->bindParam(':id', $id);
+                $sth->execute();
+
+                $bannedip = "127.0.0.1";
+//                $format = 'Y-m-!d H:i:s';
+//                $banduration = DateTime::createFromFormat($format, $bantime);
+//                var_dump($banduration);
+
+                $query = "INSERT INTO `bans` (`UserID`, `BanTime`, `BanReason`, `BanDuration`, `IPBan`, `BannedIPAddress`)
+                          VALUES (:id, NOW(), :reason, :bantime, :ipban, :bannedip)";
+                $sth = $this->dbh->prepare($query);
+                $sth->bindParam(':id', $id);
+                $sth->bindParam(':reason', $reason);
+                $sth->bindParam(':ipban', $ipban);
+                $sth->bindParam(':bantime', $bantime);
+                $sth->bindParam(':bannedip', $bannedip);
+                $sth->execute();
+                return true;
+            }
         }
         catch(Exception $e)
         {
