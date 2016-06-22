@@ -54,7 +54,7 @@ class CMS extends Controller {
         //Versturen van data naar de view
         $all_users = $user->getUserById($id);
 
-        $this->view('cms-users/user-edit', ['users' => $all_users]);
+        $this->view('cms-users/user-edit', ['users' => $all_users, 'user' => $user, 'UserID' => $id]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
@@ -96,23 +96,32 @@ class CMS extends Controller {
         echo json_encode($user->searchUsers($term));
     }
 
-    public function user_suspend() {
+    public function user_suspend($id = null)
+    {
         $user =  $this->model('user');
+
+        if($id != null)
+        {
+            $user->getUserById($id);
+        }
+
+        $get_user = $user->getUserById($id);
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-suspend');
+        $this->view('cms-users/user-suspend', ['users' => $get_user]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
 
-    public function GetCurrentPage() {
-        $current_page = explode("/", $_SERVER['REQUEST_URI']);
-        $search = "cms";
-        while (($next = next($current_page)) !== NULL) {
-            if ($next == $search) {
-                return next($current_page);
-            }
+    public function GetCurrentPage()
+        {
+            $current_page = explode("/", $_SERVER['REQUEST_URI']);
+            $search = "cms";
+            while (($next = next($current_page)) !== NULL) {
+                if ($next == $search) {
+                    return next($current_page);
+                }
             }
         }
 

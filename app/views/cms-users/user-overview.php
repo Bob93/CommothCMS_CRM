@@ -1,11 +1,3 @@
-<?php
-
-if(isset($_POST['search-submit'])) {
-    $data['users']->searchUsers['edit-form-search'];
-}
-
-?>
-
 <section id="content">
 
     <div class="content-wrap">
@@ -100,11 +92,17 @@ if(isset($_POST['search-submit'])) {
                             success: function (result) {
                                 $("tr > td").remove();
                                 $(result).each(function (index, value) {
-                                    $("#table-overview").append("<tr><td>" + result[index]['UserID'] + "</td><td>" + result[index]['Username'] + "</td><td>" + result[index]['FirstName'] + " " +  result[index]['Lastname'] + "</td><td>" +  result[index]['DateSignedUp'] + "</td>" +
+                                    $("#not_found").remove();
+                                    $("#table-overview").append("<tr><td>" + result[index]['UserID'] + "</td><td>" + result[index]['Username'] + "</td><td>" + result[index]['FirstName'] + " " +  result[index]['Lastname'] + "</td>" +
                                         "<td><a href=\"user_edit/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a>"
+                                        + "<td><a href=\"user_suspend/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Suspend</a>"
                                         + "<td><a href=\"user_delete/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Delete</a>");
-                                });
-                                console.log(result[0]['FirstName']);
+                                    });
+
+                                if( !$(result).val() ) {
+                                    $("#not_found").remove();
+                                    $("#table-overview").after("<div class='col_full' id='not_found'><h1 class='center' style='margin-top: 20px;'>No users found</h1></div>");
+                                };
                             },
                             error: function (req, status, error) {
                                 console.log("ERROR:" + error.toString() + " " + status + " " + req.responseText);
@@ -120,8 +118,8 @@ if(isset($_POST['search-submit'])) {
                     <th>UserID</th>
                     <th>Username</th>
                     <th>Full Name</th>
-                    <th>Register Date</th>
                     <th>Modify</th>
+                    <th>Suspend</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -134,9 +132,9 @@ if(isset($_POST['search-submit'])) {
                                 <td>" . $user['UserID'] . "</td>
                                 <td>" . $user['Username'] . "</td>
                                 <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
-                                <td>" . $user['DateSignedUp'] . "</td>
                         <td><a href=\"" . $this->public_dir . "user_edit/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
-                        <td><a href=\"" . $this->public_dir . "user_delete/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-red'>Delete</a></td>
+                        <td><a href=\"" . $this->public_dir . "user_suspend/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Suspend</a></td>
+                        <td><a href=\"" . $this->public_dir . "user_delete/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Delete</a></td>
                         </tr>";
                     }
                 ?>

@@ -203,8 +203,8 @@ class User extends Model{
     }
 
     // aanpassingen van een gebruiker
-    public function updateUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
-                               $active, $bantime)
+    public function updateUser($id, $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
+                               $active, $regularban)
     {
         // het nieuwe of aangepaste wachtwoord opnieuw hashen voor het wordt opgeslagen.
         $hashed_password = md5($password);
@@ -227,10 +227,10 @@ class User extends Model{
         try
         {
             // Updaten van de database, tabel users
-            $query = "UPDATE users SET FirstName=:firstname AND Insertion=:insertion AND Lastname=:lastname AND
-                Username=:username AND Password=:password AND Phone=:phone AND Address=:address AND
-                Country=:country AND Email=:email AND Rights=:rights AND Active=:active AND BanTime=:bantime AND IP=:ip AND RegistrationIP=:ip AND
-                DateSignedUp=NOW() AND LastLogin=NOW() AND LastLocation=NULL WHERE UserID=:id";
+            $query = "UPDATE users SET FirstName=:firstname, Insertion=:insertion, Lastname=:lastname,
+                Username=:username, Password=:password, Phone=:phone, Address=:address,
+                Country=:country, Email=:email, Rights=:rights, Active=:active, RegularBan=:regularban, IP=:ip, RegistrationIP=:ip,
+                DateSignedUp=NOW(), LastLogin=NOW(), LastLocation=NULL WHERE UserID=:id";
 
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':firstname', $firstname);
@@ -244,7 +244,7 @@ class User extends Model{
             $sth->bindParam(':email', $email);
             $sth->bindParam(':rights', $rights);
             $sth->bindParam(':active', $active);
-            $sth->bindParam(':bantime', $bantime);
+            $sth->bindParam(':regularban', $regularban);
             $sth->bindParam(':ip', $ip);
             $sth->bindParam(':id', $id);
             $sth->execute();
@@ -263,6 +263,23 @@ class User extends Model{
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
             $query = "UPDATE users SET Active=:active WHERE UserId=:id";
+            $sth = $this->dbh->prepare($query);
+            $sth->bindParam(':active', $active);
+            $sth->bindParam(':id', $id);
+            $sth->execute();
+            return true;
+        }
+        catch(Exception $e)
+        {
+            return 'De gebruiker is niet verwijderd! ' . $e->getMessage();
+        }
+    }
+
+    public function suspendUser($id, $reason, $bantime, $ipban = false)
+    {
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
+        try {
+            $query = "UPDATE users SET Ban=:active WHERE UserId=:id";
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':active', $active);
             $sth->bindParam(':id', $id);

@@ -23,14 +23,14 @@ if(isset($_POST['edit-form-submit'])) {
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="icon-remove-sign"></i><strong>Oh snap!</strong> Some fields are not (correctly) filled in.
 	    </div></div>';
-    } elseif ($data['function']->checkPassword($password, $redo_password) == false) {
+    } elseif ($data['user']->checkPassword($password, $redo_password) == false) {
         echo '<div class="container clearfix"><div class="alert alert-danger center nobottommargin">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="icon-remove-sign"></i><strong>Oh snap!</strong> Passwords do not match.
 	</div></div>';
     } else
     {
-        if ($data['function']->updateUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
+        if ($data['user']->updateUser($data['UserID'], $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
                 $rights,  $active, $bantime) == true)
         {
             echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
@@ -118,12 +118,12 @@ if(isset($_POST['edit-form-submit'])) {
 
                                 <div class="col_half">
                                     <label for="edit-form-password">Choose Password:</label>
-                                    <input type="password" id="edit-form-password" name="edit-form-password" value="<?php echo $item['Password']; ?>" class="form-control" />
+                                    <input type="password" id="edit-form-password" name="edit-form-password" placeholder="Password" class="form-control" />
                                 </div>
 
                                 <div class="col_half col_last">
                                     <label for="edit-form-repassword">Re-enter Password:</label>
-                                    <input type="password" id="edit-form-repassword" name="edit-form-repassword" value="<?php echo $item['Password']; ?>" class="form-control" />
+                                    <input type="password" id="edit-form-repassword" name="edit-form-repassword" placeholder="Retype Password" class="form-control" />
                                 </div>
 
                                 <div class="col_half">
@@ -132,8 +132,8 @@ if(isset($_POST['edit-form-submit'])) {
                                 </div>
 
                                 <div class="col_half col_last">
-                                    <label for="edit-form-bantime">Ban Time:</label>
-                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="<?php echo $item['BanTime']; ?>" class="form-control" />
+                                    <label for="edit-form-bantime">Banned:</label>
+                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="<?php echo $item['RegularBan']; ?>" class="form-control" />
                                 </div>
                                 <?php } ?>
 
