@@ -315,11 +315,10 @@ class User extends Model{
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
             if(!$id == null) {
-                $active = 0;
                 if($ipban == false) {
-                    $query = "UPDATE users SET RegularBan=:regularban, Active=:active WHERE UserId=:id";
+                    $query = "UPDATE users SET RegularBan=:regularban WHERE UserId=:id";
                 } else {
-                    $query = "UPDATE users SET IPBanned=:ipban, Active=:active WHERE UserId=:id";
+                    $query = "UPDATE users SET IPBanned=:ipban WHERE UserId=:id";
                 }
 
                 $sth = $this->dbh->prepare($query);
@@ -331,7 +330,6 @@ class User extends Model{
                     $ipban = true;
                     $sth->bindParam(':ipban', $ipban);
                 }
-                $sth->bindParam(':active', $active);
                 $sth->bindParam(':id', $id);
                 $sth->execute();
 
@@ -354,8 +352,15 @@ class User extends Model{
         }
         catch(Exception $e)
         {
-            return 'De gebruiker is niet verwijderd! ' . $e->getMessage();
+            return 'De gebruiker is niet verbannen! ' . $e->getMessage();
         }
+    }
+
+    public function updateBan($id, $banID, $reason, $bantime, $ipban = 0, $bannedip = null) {
+        if(!$id == null) {
+            
+        }
+
     }
 
 

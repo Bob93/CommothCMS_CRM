@@ -66,4 +66,3 @@
         </div>
 
     </section><!-- #content end -->
-<?=$data['name']; ?>

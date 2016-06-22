@@ -3,12 +3,12 @@
         <div class="footer-widgets-wrap clearfix">
             <div class="col_one_third">
                 <div class="widget clearfix">
-                    <img src="<?php  echo $this->public_dir  ?>images/commoth-logo.png" alt="" class="footer-logo">
+                    <img src="<?php echo Config::$public_dir ?>images/commoth-logo.png" alt="" class="footer-logo">
                     <p>Wij geloven in  <strong>simpele</strong>, <strong>creatieve</strong> &amp; <strong>flexibele</strong> design standaarden.</p>
                 </div>
             </div>
             <div class="col_one_third">
-                <div style="background: url("<?php  echo $this->public_dir  ?>images/world-map.png") no-repeat center center; background-size: 100%;">
+                <div style="background: url("<?php echo Config::$public_dir ?>images/world-map.png") no-repeat center center; background-size: 100%;">
                 <address>
                     Schaapsdrift 76<br>
                     6824GT, Arnhem<br>
@@ -94,7 +94,7 @@
 
 <!-- Footer Scripts
 ============================================= -->
-<script type="text/javascript" src="<?php  echo $this->public_dir  ?>js/functions.js"></script>
+<script type="text/javascript" src="<?php echo Config::$public_dir ?>js/functions.js"></script>
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

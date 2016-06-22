@@ -136,38 +136,49 @@ if(isset($_POST['edit-form-submit'])) {
                                     <input type="text" id="edit-form-active" name="edit-form-active" value="<?php echo $item['Active']; ?>" class="form-control" />
                                 </div>
 
-<!--                                <div class="col_half col_last">-->
-<!--                                    <label for="edit-form-bantime">Banned:</label>-->
-<!--                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="--><?php //echo $item['RegularBan']; ?><!--" class="form-control" />-->
-<!--                                </div>-->
-                                <?php } ?>
-
-                                <?php
-                                    if($item['RegularBan'] = 1 || $item['IPBanned'] = 1) {
+                                    <?php
+                                    if($item['RegularBan'] == 1 || $item['IPBanned'] == 1) {
                                         echo '<div class="clear"></div>
                                              <h3 style="color:red;">Account Banned</h3>
                                              <div class="col_half">
-                                            <label for="edit-form-bantime">Banned:</label>
-                                            <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="' . $item["RegularBan"] . '" class="form-control" />
+                                            <label for="edit-form-regban">Banned [Bans Table: ' . (($data['bandata'][0]['BanID']) ? 'Yes' : 'No') . ']</label>
+                                            <input type="text" id="edit-form-regban" name="edit-form-regban" value="' . $item["RegularBan"] . '" class="form-control" />
                                             </div>
 
                                             <div class="col_half col_last">
-                                            <label for="edit-form-bantime">IP Banned:</label>
-                                            <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="' . $item["IPBanned"] . '" class="form-control" />
+                                            <label for="edit-form-ipban">IP Banned [Bans Table: ' . (($data['bandata'][0]['IPBan']) ? 'Yes' : 'No') . ']:</label>
+                                            <input type="text" id="edit-form-ipban" name="edit-form-ipban" value="' . $item["IPBanned"] . '" class="form-control" />
                                             </div>
+                                            
+                                            <div class="col_full">
+                                            <label for="edit-form-bannedip">Banned IP(s):</label>
+                                            <input type="text" id="edit-form-bannedip" name="edit-form-bannedip" value="' . $data['bandata'][0]['BannedIPAddress'] . '" class="form-control" />
+                                            </div>
+                                           
+                                            <div class="col_half">
+                                            <label for="edit-form-banreason">Ban Reason:</label>
+                                            <textarea id="edit-form-banreason" name="edit-form-banreason" class="form-control text-area" rows="5" cols="50"  />' . $data['bandata'][0]['BanReason'] . '</textarea>
+                                            </div>
+                                           
+                                            <div class="col_half col_last">
+                                            <label for="edit-form-bantime">Time of Ban:</label>
+                                            <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="' . $data['bandata'][0]['BanTime'] . '" class="form-control" readonly />
+                                            </div>
+                                            
+                                            <div class="col_half col_last">
+                                            <label for="edit-form-duration">Banned Till:</label>
+                                            <input type="datetime-local" name="suspend-form-time" id="suspend-form-time" class="form-control center" value="' . DateTime::createFromFormat('Y-m-d H:i:s', $data['bandata'][0]['BanDuration'])->format('Y-m-d\TH:i:s') . '">
+                                            </div>
+                                 
+                                         
                                             ';
-
-                                        var_dump($data['bandata']);
-
-                                     echo $data['bandata'][0]['BanReason'];
 
 
 
 
 
                                     }
-
-                                    ?>
+                                } ?>
 
                                 <div class="clear"></div>
 

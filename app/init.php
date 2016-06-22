@@ -12,5 +12,5 @@ require_once('core/Model.php');
 
 class Config
 {
-    public static $public_dir = "/COMMOTH CO-1.0/website/CommothCMS_CRM/public/";
+    public static $public_dir = "/Commoth/CommothCMS_CRM/public/";
 }
