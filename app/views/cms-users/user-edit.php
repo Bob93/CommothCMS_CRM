@@ -104,8 +104,13 @@ if(isset($_POST['edit-form-submit'])) {
 
                                 <h3>Account Details</h3>
 
+                                <div class="col_full">
+                                    <label for="edit-form-username">UserID:</label>
+                                    <input type="text" id="edit-form-userid" name="edit-form-userid" value="<?php echo $item['UserID']; ?>" class="form-control" readonly />
+                                </div>
+
                                 <div class="col_half">
-                                    <label for="edit-form-username">Choose a Username:</label>
+                                    <label for="edit-form-username">Username:</label>
                                     <input type="text" id="edit-form-username" name="edit-form-username" value="<?php echo $item['Username']; ?>" class="form-control" />
                                 </div>
 
@@ -131,11 +136,38 @@ if(isset($_POST['edit-form-submit'])) {
                                     <input type="text" id="edit-form-active" name="edit-form-active" value="<?php echo $item['Active']; ?>" class="form-control" />
                                 </div>
 
-                                <div class="col_half col_last">
-                                    <label for="edit-form-bantime">Banned:</label>
-                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="<?php echo $item['RegularBan']; ?>" class="form-control" />
-                                </div>
+<!--                                <div class="col_half col_last">-->
+<!--                                    <label for="edit-form-bantime">Banned:</label>-->
+<!--                                    <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="--><?php //echo $item['RegularBan']; ?><!--" class="form-control" />-->
+<!--                                </div>-->
                                 <?php } ?>
+
+                                <?php
+                                    if($item['RegularBan'] = 1 || $item['IPBanned'] = 1) {
+                                        echo '<div class="clear"></div>
+                                             <h3 style="color:red;">Account Banned</h3>
+                                             <div class="col_half">
+                                            <label for="edit-form-bantime">Banned:</label>
+                                            <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="' . $item["RegularBan"] . '" class="form-control" />
+                                            </div>
+
+                                            <div class="col_half col_last">
+                                            <label for="edit-form-bantime">IP Banned:</label>
+                                            <input type="text" id="edit-form-bantime" name="edit-form-bantime" value="' . $item["IPBanned"] . '" class="form-control" />
+                                            </div>
+                                            ';
+
+                                        var_dump($data['bandata']);
+
+                                     echo $data['bandata'][0]['BanReason'];
+
+
+
+
+
+                                    }
+
+                                    ?>
 
                                 <div class="clear"></div>
 
