@@ -48,13 +48,15 @@ class CMS extends Controller {
         if($id != null)
         {
             $user->getUserById($id);
+            $user->getBanData($id);
         }
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
         $all_users = $user->getUserById($id);
+        $get_bandata = $user->getBanData($id);
 
-        $this->view('cms-users/user-edit', ['users' => $all_users, 'user' => $user, 'UserID' => $id]);
+        $this->view('cms-users/user-edit', ['users' => $all_users, 'user' => $user, 'UserID' => $id, 'bandata' => $get_bandata]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
@@ -109,7 +111,7 @@ class CMS extends Controller {
 
         $this->view('cms-defaults/header');
         //Versturen van data naar de view
-        $this->view('cms-users/user-suspend', ['users' => $get_user]);
+        $this->view('cms-users/user-suspend', ['users' => $get_user, 'user' => $user]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
         $this->view('cms-defaults/footer');
     }
