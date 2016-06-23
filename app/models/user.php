@@ -182,9 +182,14 @@ class User extends Model{
         {
             // insertion query met prepare en execute statments
             $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`,
-                `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `BanTime`, `IP`, `RegistrationIP`, `DateSignedUp`,
-                `LastLogin`, `LastLocation`) VALUES ('$firstname' ,'$insertion', '$lastname', '$username', '$hashed_password',
-                '$phone', '$address', '$country', '$email', '$rights', '$active', NOW() , '$ip', '$ip', NOW(), NULL, NULL )";
+                `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`,
+                `LastLogin`, `LastLocation`) VALUES (:firstname, :insertion, :lastname, :username, :password,
+                :phone, :address, :country, :email, :rights, :active, :ip, :ip, NOW(), NULL, NULL )";
+
+
+            //tijdelijk
+            //$regip = "127.0.0.1";
+
 
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':firstname', $firstname);
@@ -310,44 +315,51 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function suspendUser($id, $reason, $bantime, $ipban = 0, $bannedip = null)
+    public function suspendUser($id, $reason, $bantime, $ipban = 0, $bannedip = null, $update_user = false)
     {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
             if(!$id == null) {
-                if($ipban == false) {
-                    $query = "UPDATE users SET RegularBan=:regularban WHERE UserId=:id";
+
+                if ($update_user == false) {
+                    //od stuff
                 } else {
-                    $query = "UPDATE users SET IPBanned=:ipban WHERE UserId=:id";
-                }
 
-                $sth = $this->dbh->prepare($query);
 
-                if($ipban == false) {
-                    $regularban = true;
-                    $sth->bindParam(':regularban', $regularban);
-                } else {
-                    $ipban = true;
-                    $sth->bindParam(':ipban', $ipban);
-                }
-                $sth->bindParam(':id', $id);
-                $sth->execute();
+                    if ($ipban == false) {
+                        $query = "UPDATE users SET RegularBan=:regularban WHERE UserId=:id";
+                    } else {
+                        $query = "UPDATE users SET IPBanned=:ipban WHERE UserId=:id";
+                    }
 
-                $bannedip = "127.0.0.1";
+                    $sth = $this->dbh->prepare($query);
+
+                    if ($ipban == false) {
+                        $regularban = true;
+                        $sth->bindParam(':regularban', $regularban);
+                    } else {
+                        $ipban = true;
+                        $sth->bindParam(':ipban', $ipban);
+                    }
+                    $sth->bindParam(':id', $id);
+                    $sth->execute();
+
+                    $bannedip = "127.0.0.1";
 //                $format = 'Y-m-!d H:i:s';
 //                $banduration = DateTime::createFromFormat($format, $bantime);
 //                var_dump($banduration);
 
-                $query = "INSERT INTO `bans` (`UserID`, `BanTime`, `BanReason`, `BanDuration`, `IPBan`, `BannedIPAddress`)
+                    $query = "INSERT INTO `bans` (`UserID`, `BanTime`, `BanReason`, `BanDuration`, `IPBan`, `BannedIPAddress`)
                           VALUES (:id, NOW(), :reason, :bantime, :ipban, :bannedip)";
-                $sth = $this->dbh->prepare($query);
-                $sth->bindParam(':id', $id);
-                $sth->bindParam(':reason', $reason);
-                $sth->bindParam(':ipban', $ipban);
-                $sth->bindParam(':bantime', $bantime);
-                $sth->bindParam(':bannedip', $bannedip);
-                $sth->execute();
-                return true;
+                    $sth = $this->dbh->prepare($query);
+                    $sth->bindParam(':id', $id);
+                    $sth->bindParam(':reason', $reason);
+                    $sth->bindParam(':ipban', $ipban);
+                    $sth->bindParam(':bantime', $bantime);
+                    $sth->bindParam(':bannedip', $bannedip);
+                    $sth->execute();
+                    return true;
+                }
             }
         }
         catch(Exception $e)

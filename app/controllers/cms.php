@@ -24,6 +24,14 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
+    public function login() {
+        $user =  $this->model('user');
+
+        //Versturen van data naar de view
+        $this->view('cms/login');
+        //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
+    }
+
     public function user_overview($offset = 0) {
         $user =  $this->model('user');
 
