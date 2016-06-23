@@ -1,3 +1,5 @@
+<?php session_destroy(); ?>
+
 <section id="content">
 
     <div class="content-wrap">

@@ -28,7 +28,7 @@ class CMS extends Controller {
         $user =  $this->model('user');
 
         //Versturen van data naar de view
-        $this->view('cms/login');
+        $this->view('cms/login', ['user' => $user]);
         //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
     }
 
@@ -36,7 +36,7 @@ class CMS extends Controller {
         $user =  $this->model('user');
 
 
-        $this->view('cms-defaults/header');
+        $this->view('cms-defaults/header', ['user' => $user]);
 
         //Versturen van data naar de view
         // Alle gebruikers ophalen met de functie get all users.

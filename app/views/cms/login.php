@@ -37,10 +37,12 @@
 <?php
 
 if(isset($_POST['login-form-submit'])) {
-    $_SESSION['UserID'] = $_POST['login-form-username'];  // Initializing Session with value of PHP Variable
-    echo $_POST['login-form-username'];
-    echo $_POST['login-form-username'];
-    echo $_SESSION['UserID'];
+    $username = $_POST['login-form-username'];
+    $password = md5($_POST['login-form-password']);
+    if($data['user']->userLogin($username, $password)) {
+        $_SESSION['UserID'] = $data['user']->userLogin($username, $password);
+        header('Location: ' . $this->public_dir . 'index');
+    }
 }
 
 ?>
@@ -75,7 +77,7 @@ if(isset($_POST['login-form-submit'])) {
 
                             <div class="col_full nobottommargin">
                                 <button class="button button-3d nomargin" id="login-form-submit" name="login-form-submit" style="background-color:orange;" value="login">Login</button>
-                                <a href="#" class="fright">Forgot Password?</a>
+                                <a href="" class="fright">Forgot Password?</a>
                             </div>
                         </form>
 
@@ -83,7 +85,7 @@ if(isset($_POST['login-form-submit'])) {
                     </div>
                 </div>
 
-                <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by Commoth V.O.F.</small></div>
+                <div class="row center dark"><small>Copyrights <?php echo date('Y') ?> &copy; All Rights Reserved by Commoth V.O.F.</small></div>
 
             </div>
         </div>

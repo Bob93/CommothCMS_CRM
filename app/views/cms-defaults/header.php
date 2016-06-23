@@ -35,6 +35,15 @@
 
 <body class="stretched no-transition">
 
+<?php
+if(!isset($_SESSION['UserID'])) {
+        header('Location: ' . $this->public_dir . 'login');
+    die();
+} else {
+
+}
+?>
+
 <!-- Document Wrapper
 ============================================= -->
 <div id="wrapper" class="clearfix">

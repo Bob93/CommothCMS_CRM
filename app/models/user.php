@@ -72,6 +72,35 @@ class User extends Model{
 
     }
 
+    public function userLogin($username, $password) {
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
+        try
+        {
+            $query = "SELECT UserID FROM Users WHERE Username = :username AND Password=:password AND Rights=2";
+            $sth = $this->dbh->prepare($query);
+            $sth->bindValue(':username', $username);
+            $sth->bindValue(':password', $password);
+            $sth->execute();
+
+            // alle gebruikers ophalen met een count 1 en hoger. Ze worden weergegeven met de voornaam, achternaam en username.
+            if($sth->rowCount() >= 1)
+            {
+                $row = $sth->fetch(PDO::FETCH_OBJ);
+                $this->id = $row->UserID;
+
+                return $this->id;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch(Exception $e)
+        {
+            return false;
+        }
+    }
+
     // alle users opgehaald uit de users tabel
     public function getAllUsers($offset = 0)
     {
