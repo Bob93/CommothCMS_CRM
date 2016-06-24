@@ -31,7 +31,7 @@ class User extends Model{
     {
         parent::__construct();
         if(!is_null($id)){
-           $this->getAllUserById($id);
+            $this->getAllUserById($id);
         }
     }
 
@@ -76,19 +76,22 @@ class User extends Model{
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
         {
-            $query = "SELECT UserID FROM Users WHERE Username = :username AND Password=:password AND Rights=2";
+            $query = "SELECT Username, UserID, Password FROM Users WHERE Username = :username AND Rights=2";
             $sth = $this->dbh->prepare($query);
             $sth->bindValue(':username', $username);
-            $sth->bindValue(':password', $password);
             $sth->execute();
-
+            $result = $sth->fetch(PDO::FETCH_ASSOC);
             // alle gebruikers ophalen met een count 1 en hoger. Ze worden weergegeven met de voornaam, achternaam en username.
-            if($sth->rowCount() >= 1)
+            if(password_verify($password, $result['Password']))
             {
                 $row = $sth->fetch(PDO::FETCH_OBJ);
-                $this->id = $row->UserID;
-
-                return $this->id;
+                $this->id = $result['UserID'];
+                $returndata = array(
+                    'userid' => $result['UserID'],
+                    'username' => $result['Username'],
+                    'hash' => $result['Password']
+                );
+                return $returndata;
             }
             else
             {
@@ -169,35 +172,26 @@ class User extends Model{
     // check of het wachtwoord overeen komt
     public function checkPassword($password, $password_redo)
     {
-        $hashed_password = md5($password);
-
-        $check_hash = md5($password_redo);
-
-        if($hashed_password == $check_hash)
+        if($password == $password_redo)
         {
             return true;
         }
         else
         {
-           return false;
+            return false;
         }
     }
 
     // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
-    public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email)
+    public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights, $active)
     {
-        $rights = 0;
-        $active = 1;
-
         // hashen van het password
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // client ip adres opvragen
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
-        {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        }
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
         {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
@@ -213,7 +207,7 @@ class User extends Model{
             $query = "INSERT INTO users (`FirstName`, `Insertion`, `Lastname`, `Username`, `Password`,
                 `Phone`, `Address`, `Country`, `Email`, `Rights`, `Active`, `IP`, `RegistrationIP`, `DateSignedUp`,
                 `LastLogin`, `LastLocation`) VALUES (:firstname, :insertion, :lastname, :username, :password,
-                :phone, :address, :country, :email, :rights, :active, :ip, :ip, NOW(), NULL, NULL )";
+                :phone, :address, :country, :email, :rights, :active, :ip, :ip2, NOW(), NULL, NULL )";
 
 
             //tijdelijk
@@ -233,6 +227,7 @@ class User extends Model{
             $sth->bindParam(':rights', $rights);
             $sth->bindParam(':active', $active);
             $sth->bindParam(':ip', $ip);
+            $sth->bindParam(':ip2', $ip);
             $sth->execute();
             return true;
         }
@@ -247,7 +242,7 @@ class User extends Model{
                                $active, $regularban)
     {
         // het nieuwe of aangepaste wachtwoord opnieuw hashen voor het wordt opgeslagen.
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // client ip adres opvragen
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
@@ -350,7 +345,7 @@ class User extends Model{
         try {
             if(!$id == null) {
 
-                if ($update_user == false) {
+                if ($update_user == true) {
                     //od stuff
                 } else {
 
@@ -399,7 +394,7 @@ class User extends Model{
 
     public function updateBan($id, $banID, $reason, $bantime, $ipban = 0, $bannedip = null) {
         if(!$id == null) {
-            
+
         }
 
     }

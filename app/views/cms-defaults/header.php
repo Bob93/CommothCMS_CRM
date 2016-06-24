@@ -36,8 +36,18 @@
 <body class="stretched no-transition">
 
 <?php
+
+if (!isset($_SESSION['CREATED'])) {
+    $_SESSION['CREATED'] = time();
+} else if (time() - $_SESSION['CREATED'] > 900) { //15 minutes
+    // session started more than 15 minutes ago
+    session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
+    session_unset();     // unset $_SESSION variable for the run-time
+    session_destroy();   // destroy session data in storage
+}
+
 if(!isset($_SESSION['UserID'])) {
-        header('Location: ' . $this->public_dir . 'login');
+   header('Location: ' . $this->public_dir . 'login');
     die();
 } else {
 
@@ -60,25 +70,8 @@ if(!isset($_SESSION['UserID'])) {
                 ============================================= -->
                 <div class="top-links">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="login-register.html">Login</a>
-                            <div class="top-link-section">
-                                <form id="top-login" role="form">
-                                    <div class="input-group" id="top-login-username">
-                                        <span class="input-group-addon"><i class="icon-user"></i></span>
-                                        <input type="email" class="form-control" placeholder="Email address" required="">
-                                    </div>
-                                    <div class="input-group" id="top-login-password">
-                                        <span class="input-group-addon"><i class="icon-key"></i></span>
-                                        <input type="password" class="form-control" placeholder="Password" required="">
-                                    </div>
-                                    <label class="checkbox">
-                                        <input type="checkbox" value="remember-me"> Remember me
-                                    </label>
-                                    <button class="btn btn-danger btn-block" type="submit">Sign in</button>
-                                </form>
-                            </div>
-                        </li>
+                        <li><a href="#">Welcome, <?php echo $_SESSION['UserID']['username']; ?></a></li>
+                        <li><a href="<?php  echo $this->public_dir ?>logout">Logout</a></li>
                     </ul>
                 </div><!-- .top-links end -->
 

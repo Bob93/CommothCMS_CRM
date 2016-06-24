@@ -1,5 +1,3 @@
-<?php session_destroy(); ?>
-
 <section id="content">
 
     <div class="content-wrap">
@@ -131,9 +129,9 @@
                     foreach($data['users'] as $user)
                     {
                         echo "<tr>
-                                <td>" . $user['UserID'] . "</td>
-                                <td>" . $user['Username'] . "</td>
-                                <td>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
+                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['UserID'] . "</td>
+                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['Username'] . "</td>
+                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
                         <td><a href=\"" . $this->public_dir . "user_edit/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
                         <td><a href=\"" . $this->public_dir . "user_suspend/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Suspend</a></td>
                         <td><a href=\"" . $this->public_dir . "user_delete/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Delete</a></td>

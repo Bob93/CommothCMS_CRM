@@ -12,24 +12,26 @@ if(isset($_POST['register-form-submit'])) {
     $address = $_POST['register-form-address'];
     $country = $_POST['register-form-country'];
     $email = $_POST['register-form-email'];
+    $rights = $_POST['register-form-rights'];
+    $active = $_POST['register-form-active'];
 
-    if ((empty($username)) && (empty($password) && (empty($firstname)) && (empty($lastname)))) {
+    if ((empty($username) || (!is_numeric($phone)) || (empty($password) || (empty($firstname)) || (empty($lastname))))) {
         echo '<div class="container clearfix"><div class="alert alert-danger center nobottommargin">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="icon-remove-sign"></i><strong>Oh snap!</strong> Some fields are not (correctly) filled in.
 	</div></div>';
-    } elseif ($data['users']->checkUsername($username) == false) {
+    } else if ($data['users']->checkUsername($username) == false) {
         echo '<div class="container clearfix"><div class="alert alert-danger center nobottommargin">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="icon-remove-sign"></i><strong>Oh snap!</strong> Username already exists in the database.
 	</div></div>';
-    } elseif ($data['users']->checkPassword($password, $redo_password) == false) {
+    } else if ($data['users']->checkPassword($password, $redo_password) == false) {
         echo '<div class="container clearfix"><div class="alert alert-danger center nobottommargin">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="icon-remove-sign"></i><strong>Oh snap!</strong> Passwords do not match.
 	</div></div>';
     } else {
-        if ($data['users']->createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email) == true) {
+        if ($data['users']->createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights, $active) == true) {
             echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <i class="icon-gift"></i><strong>Well done!</strong> You successfully created the user " ' . $username . '".

@@ -38,12 +38,17 @@
 
 if(isset($_POST['login-form-submit'])) {
     $username = $_POST['login-form-username'];
-    $password = md5($_POST['login-form-password']);
+    $password = $_POST['login-form-password'];
     if($data['user']->userLogin($username, $password)) {
         $_SESSION['UserID'] = $data['user']->userLogin($username, $password);
+        $now = time();
+        $_SESSION['then'] = $now;
         header('Location: ' . $this->public_dir . 'index');
+    } else {
+        header('Location: ' . Config::$public_dir . 'index');
     }
 }
+
 
 ?>
 
