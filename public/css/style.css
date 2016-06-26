@@ -1176,7 +1176,7 @@ body.stretched #header.full-header .container {
 #primary-menu ul ul li:hover > a {
     background-color: #F9F9F9;
     padding-left: 18px;
-    color: #1ABC9C !important;
+    color: orange !important;
 }
 
 #primary-menu ul ul i { line-height: inherit; }
@@ -9999,6 +9999,15 @@ body:not(.device-touch) .team-overlay {
 .table-comparison td:first-child {
     text-align: left;
     font-weight: bold;
+}
+
+
+#table-overview > tbody> tr > td{
+    width: 100px;
+}
+
+#table-overview > tbody > tr > td.userid {
+    width: 30px!important;
 }
 
 

@@ -93,10 +93,14 @@
                                 $("tr > td").remove();
                                 $(result).each(function (index, value) {
                                     $("#not_found").remove();
-                                    $("#table-overview").append("<tr><td>" + result[index]['UserID'] + "</td><td>" + result[index]['Username'] + "</td><td>" + result[index]['FirstName'] + " " +  result[index]['Lastname'] + "</td>" +
-                                        "<td><a href=\"user_edit/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a>"
-                                        + "<td><a href=\"user_suspend/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Suspend</a>"
-                                        + "<td><a href=\"user_delete/" + +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Delete</a>");
+                                    $("#table-overview").append("<tr><td class= \"userid\" style="
+
+                                        + (result[index]['RegularBan']  == 1 || result[index]['IPBanned'] == 1 ? "color:red" : "") +
+
+                                        ">" + result[index]['UserID'] + "</td><td style=" + (result[index]['RegularBan']  == 1 || result[index]['IPBanned'] == 1 ? "color:red" : "") + ">" + result[index]['Username'] + "</td><td style=" + (result[index]['RegularBan']  == 1 || result[index]['IPBanned'] == 1 ? "color:red" : "") + ">" + result[index]['FirstName'] + " "  + result[index]['Insertion'] + " "+  result[index]['Lastname'] + "</td>" +
+                                        "<td><a href=\"user_edit/" +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a>"
+                                        + "<td><a href=\"user_suspend/"  +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Suspend</a>"
+                                        + "<td><a href=\"user_delete/" +  result[index]['UserID'] + "\" class='button button-3d button-mini button-rounded button-red'>Delete</a>");
                                     });
 
                                 if( !$(result).val() ) {
@@ -129,9 +133,9 @@
                     foreach($data['users'] as $user)
                     {
                         echo "<tr>
-                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['UserID'] . "</td>
-                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['Username'] . "</td>
-                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red; font-weight: bold' : '') . "'>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
+                                <td class =\"userid\" style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red;' : '') . "'>" . $user['UserID'] . "</td>
+                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red;' : '') . "'>" . $user['Username'] . "</td>
+                                <td style='" . ($user['RegularBan'] || ($user['IPBanned']) ? 'color:red;' : '') . "'>" . $user['FirstName'] . ' ' . $user['Insertion'] . ' ' . $user['Lastname'] . "</td>
                         <td><a href=\"" . $this->public_dir . "user_edit/" .$user['UserID'] . "\" class='button button-3d button-mini button-rounded button-amber'>Edit</a></td>
                         <td><a href=\"" . $this->public_dir . "user_suspend/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Suspend</a></td>
                         <td><a href=\"" . $this->public_dir . "user_delete/" .$user['UserID'] . "\"  class='button button-3d button-mini button-rounded button-red'>Delete</a></td>
