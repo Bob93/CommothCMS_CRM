@@ -14,7 +14,20 @@ if(isset($_POST['edit-form-submit'])) {
     $email = $_POST['edit-form-email'];
     $active = $_POST['edit-form-active'];
     $rights = $_POST['edit-form-rights'];
-    $bantime = $_POST['edit-form-bantime'];
+
+    if(($data['bandata'][0]['Active']) >= 1) {
+        $bantime = $_POST['suspend-form-time'];
+
+        if (strtotime($bantime) < strtotime('now') || $bantime == null) {
+            $bantime = "0-00-0000 00:00:00";
+        }
+
+        $reason = $_POST['edit-form-banreason'];
+        $bannedip = $_POST['edit-form-bannedip'];
+        $isuseripbanned = $_POST['edit-form-ipban'];
+        $isuserbanned = $_POST['edit-form-regban'];
+
+    }
 
 
     if ((empty($username)) && (empty($password) && (empty($firstname)) && (empty($lastname))))
@@ -31,12 +44,26 @@ if(isset($_POST['edit-form-submit'])) {
     } else
     {
         if ($data['user']->updateUser($data['UserID'], $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email,
-                $rights,  $active, $bantime) == true)
-        {
-            echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
+                $rights,  $active) == true) {
+            if(($data['bandata'][0]['Active']) >= 1) {
+
+                echo $isuseripbanned;
+                echo $isuserbanned;
+                echo $bantime;
+
+                $data['user']-> updateSespension($data['UserID'], $reason, $bantime, $isuseripbanned , $isuserbanned);
+
+                echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="icon-gift"></i><strong>Well done!</strong> You successfully edited the user " ' . $username . '".
+             and the suspension regarding him.</div></div>';
+            } else {
+
+                echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <i class="icon-gift"></i><strong>Well done!</strong> You successfully edited the user " ' . $username . '".
             </div></div>';
+            }
         }
     }
 }
