@@ -47,11 +47,9 @@ if(isset($_POST['edit-form-submit'])) {
                 $rights,  $active) == true) {
             if(($data['bandata'][0]['Active']) >= 1) {
 
-                echo $isuseripbanned;
-                echo $isuserbanned;
-                echo $bantime;
-
                 $data['user']-> updateSespension($data['UserID'], $reason, $bantime, $isuseripbanned , $isuserbanned);
+                //hier moet naar gekeken worden gegevens worden pas na tweede refresh correct geladen.
+                //Waarschijnlijk omdat gegevens van de user eerst worden ingeladen voordat ze bewerkt worden.
 
                 echo '<div class="container clearfix"><div class="alert alert-success center nobottommargin">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

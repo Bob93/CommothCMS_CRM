@@ -132,6 +132,33 @@ class CMS extends Controller {
         $this->view('cms-defaults/footer');
     }
 
+
+    public function pages_overview() {
+        $user =  $this->model('pages');
+
+
+        //$get_user = $user->getUserById($id);
+
+        $this->view('cms-defaults/header');
+        //Versturen van data naar de view
+        $this->view('cms-pages/pages-overview');
+        //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
+        $this->view('cms-defaults/footer');
+    }
+
+    public function pages_create() {
+        $user =  $this->model('pages');
+
+
+        //$get_user = $user->getUserById($id);
+
+        $this->view('cms-defaults/header');
+        //Versturen van data naar de view
+        $this->view('cms-pages/pages-create');
+        //$this->view('cms/index', [ 'currentPage'=> $this->GetCurrentPage()]);
+        $this->view('cms-defaults/footer');
+    }
+
     public function GetCurrentPage()
         {
             $current_page = explode("/", $_SERVER['REQUEST_URI']);
@@ -142,14 +169,5 @@ class CMS extends Controller {
                 }
             }
         }
-
-
-    public function test() {
-        echo 'home/test';
-
-        $userm = $this->model('user');
-        $userm->getUserById(3);
-        echo $userm->name;
-    }
 
 }
