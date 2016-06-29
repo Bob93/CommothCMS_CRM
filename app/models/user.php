@@ -27,6 +27,10 @@ class User extends Model{
     public $lastlogin;
     public $lastlocation;
 
+    /**
+     * User constructor.
+     * @param null $id
+     */
     public function __construct($id = null)
     {
         parent::__construct();
@@ -39,7 +43,12 @@ class User extends Model{
         return 'yes';
     }
 
-    // alle gebruikers inladen bij het is
+    /**
+     * Alle users ophalen met het id.
+     *
+     * @param null $id
+     * @return mixed|string
+     */
     public function getAllUserById($id = null)
     {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
@@ -72,6 +81,13 @@ class User extends Model{
 
     }
 
+    /**
+     * Het login van de gebruiker.
+     *
+     * @param $username
+     * @param $password
+     * @return array|bool
+     */
     public function userLogin($username, $password) {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try
@@ -104,7 +120,12 @@ class User extends Model{
         }
     }
 
-    // alle users opgehaald uit de users tabel
+    /**
+     * Alle users ophalen waar active 1 is en met een limiet van 9.
+     *
+     * @param int $offset
+     * @return array
+     */
     public function getAllUsers($offset = 0)
     {
         $offset = $offset * 10;
@@ -122,6 +143,12 @@ class User extends Model{
 //        $result->execute(array($a, $b));
 //    }
 
+    /**
+     * Het zoeken van een gebruiker in de database.
+     *
+     * @param null $term
+     * @return array
+     */
     public function searchUsers($term = null) {
         $term = "%$term%";
         $query = "SELECT * FROM `users` WHERE Lastname LIKE :term OR FirstName LIKE :term OR Username LIKE :term";
@@ -132,6 +159,11 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Alle rijen tellen die gevuld zijn in de database.
+     *
+     * @return int
+     */
     public function countAllUsers() {
         $query = "SELECT * FROM users WHERE Active = 1";
         $sth = $this->dbh->prepare($query);
@@ -140,7 +172,12 @@ class User extends Model{
         return $sth->rowCount();
     }
 
-    // user wordt geselecteerd op wijze van id.
+    /**
+     * Alle gebruikers ophalen uit de database met het user id.
+     *
+     * @param $id
+     * @return array
+     */
     public function getUserById($id)
     {
         $query = "SELECT * FROM users WHERE UserID=:id";
@@ -151,7 +188,12 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // check of de username al in gebruik is
+    /**
+     * Een check of de gebruikersnaam al in gebruik is.
+     *
+     * @param $username
+     * @return bool
+     */
     public function checkUsername($username)
     {
         $query = "SELECT Username FROM users WHERE Username=:username";
@@ -169,7 +211,13 @@ class User extends Model{
         }
     }
 
-    // check of het wachtwoord overeen komt
+    /**
+     * Een check op het wachtwoord om te kijken of die met elkaar overeenkomen.
+     *
+     * @param $password
+     * @param $password_redo
+     * @return bool
+     */
     public function checkPassword($password, $password_redo)
     {
         if($password == $password_redo)
@@ -182,7 +230,22 @@ class User extends Model{
         }
     }
 
-    // een gebruiker toevoegen aan de database (registratie van de gebruiker/admin)
+    /**
+     * Gebruiker toevoegen aan de database. (registratie van een gebruiker/admin)
+     *
+     * @param $firstname
+     * @param $insertion
+     * @param $lastname
+     * @param $username
+     * @param $password
+     * @param $phone
+     * @param $address
+     * @param $country
+     * @param $email
+     * @param $rights
+     * @param $active
+     * @return bool|string
+     */
     public function createUser($firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights, $active)
     {
         // hashen van het password
@@ -237,7 +300,23 @@ class User extends Model{
         }
     }
 
-    // aanpassingen van een gebruiker
+    /**
+     * Aanpassen van een gebruiker.
+     *
+     * @param $id
+     * @param $firstname
+     * @param $insertion
+     * @param $lastname
+     * @param $username
+     * @param $password
+     * @param $phone
+     * @param $address
+     * @param $country
+     * @param $email
+     * @param $rights
+     * @param $active
+     * @return bool|string
+     */
     public function updateUser($id, $firstname, $insertion, $lastname, $username, $password, $phone, $address, $country, $email, $rights,
                                $active)
     {
@@ -290,8 +369,14 @@ class User extends Model{
         }
     }
 
-    // Door het verwijderen van de gebruiker wordt active op 0 gezet. Hij blijft dan nog wel in de database staan maar kan niet worden
-    // gebruikt.
+    /**
+     * Hier wordt de gebruiker verwijderd. Hij is niet meer zichtbaar maar wel nog in de database waar active op 0 is gezet.
+     * Als active weer op 1 wordt gezet in de database dan is gebruiker weer actief.
+     *
+     * @param $id
+     * @param int $active
+     * @return bool|string
+     */
     public function deleteUser($id, $active = 0)
     {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
@@ -309,8 +394,16 @@ class User extends Model{
         }
     }
 
-    public function checkIfUserSuspended($id) {
-        if(!$id == null) {
+    /**
+     * Check of een gebruiker non-actief is.
+     *
+     * @param $id
+     * @return bool
+     */
+    public function checkIfUserSuspended($id)
+    {
+        if(!$id == null)
+        {
             $query = "SELECT BanDuration FROM bans WHERE UserID=:id, Active=1";
             $sth = $this->dbh->prepare($query);
             $sth->bindParam(':id', $id);
@@ -324,12 +417,20 @@ class User extends Model{
             {
                 return false;
             }
-        } else {
+        } else
+        {
             return false;
         }
     }
 
-    public function getBanData($id) {
+    /**
+     * De ban datums ophalen uit de database.
+     *
+     * @param $id
+     * @return array
+     */
+    public function getBanData($id)
+    {
         $query = "SELECT * FROM bans WHERE UserID = :id AND Active=1";
         $sth = $this->dbh->prepare($query);
         $sth->bindParam(':id', $id);
@@ -338,64 +439,99 @@ class User extends Model{
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Gebruiker op non-actief zetten.
+     *
+     * @param $id
+     * @param $reason
+     * @param $bantime
+     * @param int $ipban
+     * @param null $bannedip
+     * @return bool|string
+     */
     public function suspendUser($id, $reason, $bantime, $ipban = 0, $bannedip = null)
-{
-    // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
-    try {
-        if(!$id == null) {
-                if ($ipban == false) {
-                    $query = "UPDATE users SET RegularBan=:regularban WHERE UserId=:id";
-                } else {
-                    $query = "UPDATE users SET IPBanned=:ipban WHERE UserId=:id";
-                }
-
-                $sth = $this->dbh->prepare($query);
-
-                if ($ipban == false) {
-                    $regularban = true;
-                    $sth->bindParam(':regularban', $regularban);
-                } else {
-                    $ipban = true;
-                    $sth->bindParam(':ipban', $ipban);
-                }
-                $sth->bindParam(':id', $id);
-                $sth->execute();
-
-                $bannedip = "127.0.0.1";
-                $active = 1;
-
-                $query = "INSERT INTO `bans` (`UserID`, `BanTime`, `BanReason`, `BanDuration`, `IPBan`, `BannedIPAddress`, `Active`)
-                          VALUES (:id, NOW(), :reason, :bantime, :ipban, :bannedip, :active)";
-                $sth = $this->dbh->prepare($query);
-                $sth->bindParam(':id', $id);
-                $sth->bindParam(':reason', $reason);
-                $sth->bindParam(':ipban', $ipban);
-                $sth->bindParam(':bantime', $bantime);
-                $sth->bindParam(':bannedip', $bannedip);
-                $sth->bindParam(':active', $active);
-                $sth->execute();
-                return true;
-            }
-    }
-    catch(Exception $e)
-    {
-        return 'De gebruiker is niet verbannen! ' . $e->getMessage();
-    }
-}
-
-    public function updateSespension($id, $reason, $bantime, $ipban = 0, $regularban = 0, $bannedip = null)
     {
         // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
         try {
-            if(!$id == null) {
+            if(!$id == null)
+            {
+               if ($ipban == false)
+               {
+                    $query = "UPDATE users SET RegularBan=:regularban WHERE UserId=:id";
+               }
+               else
+               {
+                    $query = "UPDATE users SET IPBanned=:ipban WHERE UserId=:id";
+               }
 
-                if($ipban == 1) {
+               $sth = $this->dbh->prepare($query);
+
+               if ($ipban == false)
+               {
+                    $regularban = true;
+                    $sth->bindParam(':regularban', $regularban);
+               }
+               else
+               {
+                    $ipban = true;
+                    $sth->bindParam(':ipban', $ipban);
+               }
+               $sth->bindParam(':id', $id);
+               $sth->execute();
+
+               $bannedip = "127.0.0.1";
+               $active = 1;
+
+               $query = "INSERT INTO `bans` (`UserID`, `BanTime`, `BanReason`, `BanDuration`, `IPBan`, `BannedIPAddress`, `Active`)
+                 VALUES (:id, NOW(), :reason, :bantime, :ipban, :bannedip, :active)";
+               $sth = $this->dbh->prepare($query);
+               $sth->bindParam(':id', $id);
+               $sth->bindParam(':reason', $reason);
+               $sth->bindParam(':ipban', $ipban);
+               $sth->bindParam(':bantime', $bantime);
+               $sth->bindParam(':bannedip', $bannedip);
+               $sth->bindParam(':active', $active);
+               $sth->execute();
+               return true;
+            }
+        }
+        catch(Exception $e)
+        {
+            return 'De gebruiker is niet verbannen! ' . $e->getMessage();
+        }
+    }
+
+    /**
+     * Het aanpassen van de non-actief stelling.
+     *
+     * @param $id
+     * @param $reason
+     * @param $bantime
+     * @param int $ipban
+     * @param int $regularban
+     * @param null $bannedip
+     * @return bool|string
+     */
+    public function updateSespension($id, $reason, $bantime, $ipban = 0, $regularban = 0, $bannedip = null)
+    {
+        // proberen de query uit te voeren, als dit niet lukt een error message laten zien.
+        try
+        {
+            if(!$id == null)
+            {
+
+                if($ipban == 1)
+                {
                     $ipban = 1;
                     $active = 1;
-                } elseif($regularban == 1) {
+                }
+                elseif($regularban == 1)
+                {
                     $regularban = 1;
                     $active = 1;
-                } else {
+                }
+                else
+                {
                     $regularban = false;
                     $ipban = false;
                     $active = 0;
@@ -435,6 +571,16 @@ class User extends Model{
         }
     }
 
+    /**
+     * Updaten van de ban die er is ingesteld op de gebruiker.
+     *
+     * @param $id
+     * @param $banID
+     * @param $reason
+     * @param $bantime
+     * @param int $ipban
+     * @param null $bannedip
+     */
     public function updateBan($id, $banID, $reason, $bantime, $ipban = 0, $bannedip = null) {
         if(!$id == null) {
 
