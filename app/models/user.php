@@ -417,7 +417,7 @@ class User extends Model{
 //                var_dump($banduration);
 
                     $query = "UPDATE `bans` SET UserID=:id, BanReason=:reason, BanDuration=:bantime, IPBan=:ipban, BannedIPAddress=:bannedip, Active=:active WHERE UserID=:id";
-                    var_dump($sth = $this->dbh->prepare($query));
+                    $sth = $this->dbh->prepare($query);
                     $sth->bindParam(':id', $id);
                     $sth->bindParam(':reason', $reason);
                     $sth->bindParam(':bantime', $bantime);
@@ -425,7 +425,7 @@ class User extends Model{
                     $sth->bindParam(':bannedip', $bannedip);
                     $sth->bindParam(':active', $active);
                     $sth->bindParam(':id', $id);
-                    var_dump($sth->execute());
+                    $sth->execute();
                     return true;
             }
         }

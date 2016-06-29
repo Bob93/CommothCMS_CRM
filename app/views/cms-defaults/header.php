@@ -115,13 +115,11 @@ if(!isset($_SESSION['UserID'])) {
                                 <li><a href="<?php  echo $this->public_dir ?>user_suspend"><div><i class="fa fa-times fa-x2"></i>Suspend User(s)</div></a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><div>Pages</div></a>
+                        <li class="<?php echo (strlen(strstr($this->GetCurrentPage(),'pages'))) ? "current" : "" ?>"><a href="<?php  echo $this->public_dir ?>pages_overview"><div>Pages</div></a>
                             <ul>
-                                <li><a href="#"><div><i class="icon-stack"></i>Overview</div></a>
-                                <li><a href="#"><div><i class="icon-adjust"></i>Create Page/Menu</div></a></li>
-                                <li><a href="#"><div><i class="icon-adjust"></i>Delete Page/Menu</div></a></li>
-                                <li><a href="#"><div><i class="icon-wrench"></i>Edit Page/Menu</div></a></li>
-                                <li><a href="#"><div><i class="icon-adjust"></i>Create/Edit Portfolio</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>pages_overview"><div><i class="icon-stack"></i>Overview</div></a>
+                                <li><a href="<?php  echo $this->public_dir ?>pages_create"><div><i class="icon-adjust"></i>Create Page/Menu</div></a></li>
+                                <li><a href="<?php  echo $this->public_dir ?>pages_portfolio"><div><i class="icon-adjust"></i>Create/Edit Portfolio</div></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><div>SEO</div></a>
