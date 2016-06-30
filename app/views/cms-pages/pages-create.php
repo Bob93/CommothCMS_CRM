@@ -99,6 +99,8 @@ if(isset($_POST['create-pages-done'])) {
 
 
                                     });
+
+
                             </script>
 
                                 <div class="col_half">
@@ -133,23 +135,46 @@ if(isset($_POST['create-pages-done'])) {
                                             This is my textarea to be replaced with CKEditor.
                                         </textarea>
 
-                                        <div id="pages_preview"></div>
                                         <script>
-                                            var preview = CKEDITOR.document.getById( 'pages_preview' );
 
-                                            function syncPreview() {
-                                                preview.setHtml( editor.getData() );
-                                            }
+//                                            $(document).ready(function()
+//                                            {
+//                                                $('#cke_19').click(function(e)
+//                                                {
+//                                                    e.preventDefault();
+//                                                    alert("hai");
+//                                                });
+//                                            })
+
+                                            $(document).ready(function()
+                                            {
+                                                $('#create-pages-preview').click(function(e)
+                                                {
+                                                    e.preventDefault();
+                                                });
+
+                                            })
 
                                             var editor = CKEDITOR.replace( 'editor1', {
-                                                on: {
-                                                    // Synchronize the preview on user action that changes the content.
-                                                    change: syncPreview,
+                                                toolbar :
+                                                    [
+                                                        { name: 'document', items : [ 'NewPage','Preview' ] },
+                                                        { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+                                                        { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
+                                                        { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'
+                                                            ,'Iframe' ] },
+                                                        '/',
+                                                        { name: 'styles', items : [ 'Styles','Format' ] },
+                                                        { name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] },
+                                                        { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+                                                        { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+                                                        { name: 'tools', items : [ 'Maximize','-','About' ] }
+                                                    ]
+                                            });
+                                            editor.addContentsCss('../css/style.css' );
 
-                                                    // Synchronize the preview when the new data is set.
-                                                    contentDom: syncPreview
-                                                }
-                                            } );
+                                            $('#editor1').ckeditor();
+
                                             </script>
                                 </div>
 
@@ -163,8 +188,13 @@ if(isset($_POST['create-pages-done'])) {
                                 <button class="button button-desc button-3d button-rounded button-green" id="create-pages-next" name="create-pages-next" value="edit" type="submit">Next (Content Page)</button>
                             </div>
                             <?php } else { ?>
-                                <div class="col_full nobottommargin center" style="margin:20px;">
-                                <button class="button button-desc button-3d button-rounded button-green" id="create-pages-done" name="create-pages-done" value="edit" type="submit">Create Page</button>
+                                <div class="col_full">
+                                    <div class="col_half nobottommargin text-left" style="margin-top:20px;">
+                                        <button class="button button-desc button-3d button-rounded" id="create-pages-preview" name="create-pages-preview" value="preview" onclick="CKEDITOR.tools.callFunction(7,this);return false;">Preview</button>
+                                    </div>
+                                    <div class="col_half col_last nobottommargin text-right" style="margin-top:20px;">
+                                    <button class="button button-desc button-3d button-rounded button-green" id="create-pages-done" name="create-pages-done" value="edit" type="submit">Create Page</button>
+                                    </div>
                                 </div>
                             <?php } ?>
 
