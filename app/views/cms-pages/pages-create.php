@@ -158,7 +158,7 @@ if(isset($_POST['create-pages-done'])) {
                                             var editor = CKEDITOR.replace( 'editor1', {
                                                 toolbar :
                                                     [
-                                                        { name: 'document', items : [ 'NewPage','Preview' ] },
+                                                        { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates', 'NewPage','Preview' ] },
                                                         { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
                                                         { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
                                                         { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'
