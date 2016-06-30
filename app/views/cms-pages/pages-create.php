@@ -190,7 +190,7 @@ if(isset($_POST['create-pages-done'])) {
                             <?php } else { ?>
                                 <div class="col_full">
                                     <div class="col_half nobottommargin text-left" style="margin-top:20px;">
-                                        <button class="button button-desc button-3d button-rounded" id="create-pages-preview" name="create-pages-preview" value="preview" onclick="CKEDITOR.tools.callFunction(7,this);return false;">Preview</button>
+                                        <button class="button button-desc button-3d button-rounded" id="create-pages-preview" name="create-pages-preview" value="preview" onclick="CKEDITOR.tools.callFunction(13,this);return false;">Preview</button>
                                     </div>
                                     <div class="col_half col_last nobottommargin text-right" style="margin-top:20px;">
                                     <button class="button button-desc button-3d button-rounded button-green" id="create-pages-done" name="create-pages-done" value="edit" type="submit">Create Page</button>
